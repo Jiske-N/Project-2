@@ -1,19 +1,46 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header bg-light">
-        <h5 class="modal-title" id="exampleModalLabel">TITLE</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-            <img class="card-img-top" src="" alt="Card image cap">
-            DESCRIPTION
+{{!-- <form class="form login-form"> --}}
+    <div class="form-group">
+      <label for="task-title">Task title</label>
+      <input class="form-input" type="text" id="task-title"/>
+    </div>
+    <div class="form-group">
+      <label for="task-description">Description</label>
+      <textarea class="form-input" id="task-description" ></textarea>
+    </div>
+        <div class="form-group">
+      <label for="task-duedate">Due date</label>
+      <input class="form-input" type="date" id="task-duedate"/>
+    </div>
+        {{!-- <div class="form-group"> --}}
+      <label for="task-status">Status</label>
+      <select class="task-status"id="task-status">
+        {{!-- TO DO dynamically render column options --}}
+        <option calue="to do">To Do</option>
+        <option value="in progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+    {{!-- </div> --}}
+    {{!-- <div class="form-group"> --}}
+      <button id="task-save" >Save</button>
+    {{!-- </div> --}}
+
+  {{!-- </form> --}}
       </div>
-      <div class="modal-footer bg-light">
+      {{!-- <div class="modal-footer bg-light">
         <button type="button" class="btn  btn-outline-secondary" data-dismiss="modal">Close</button>
-      </div>
+      </div> --}}
     </div>
   </div>
 </div>
+
+    <script src="./js/createTask.js"></script>

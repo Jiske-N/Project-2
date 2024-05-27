@@ -24,13 +24,13 @@ Task.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    created_by: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    //   references: {
-    //     model: user,
-    //     key: id
-    //   }
+    user_id: {
+      type: DataTypes.INTEGER,
+      // allowNull: false,
+      references: {
+        model: user,
+        key: id
+      }
     },
     due_date: {
         type: DataTypes.DATE,
