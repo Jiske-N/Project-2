@@ -17,13 +17,13 @@ Comment.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    created_by: {
+    user_id: {
       type: DataTypes.STRING,
       allowNull: false,
-    //   references: {
-    //     model: user,
-    //     key: id
-    //   }
+      references: {
+        model: user,
+        key: id
+      }
     },
     comment: {
         type: DataTypes.TEXT,
