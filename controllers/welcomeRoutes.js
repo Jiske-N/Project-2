@@ -5,5 +5,9 @@ router.get('/', async (req, res) => {
   res.render('welcome');
 });
 
+router.get('/board', async (req, res) => {
+  res.render('board')
+})
+
 module.exports = router;
 
