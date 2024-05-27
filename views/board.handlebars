@@ -1,4 +1,54 @@
-<div>
-    <h1>Task Board</h1>
-    <button id="add-task" data-toggle="modal" data-target="#myModal">New Task</button>
-</div>
+{{! Basic page for task manager }}
+{{! APPLY STYLING VIA BOOTSTRAP + CSS }}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Board</title>
+    {{! <link rel="stylesheet" href=""> }}
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1 class="title">Task Board</h1>
+      </header>
+      <section class="boards">
+        {{#each boards}}
+          <div class="board">
+            <header class="board-header">
+              <h3 class="board-title">{{this.name}}</h3>
+            </header>
+            <section class="tasks">
+              {{#each this.tasks}}
+                <div class="task">
+                  <header class="task-header">
+                    <h5 class="task-title">{{this.title}}</h5>
+                  </header>
+                  <p class="task-text">{{this.description}}</p>
+                  <footer class="task-footer">
+                    <small class="task-status">{{this.status}}</small>
+                  </footer>
+                </div>
+              {{/each}}
+            </section>
+          </div>
+        {{/each}}
+      </section>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
