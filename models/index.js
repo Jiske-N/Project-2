@@ -5,32 +5,42 @@ const Tag = require("./Tag");
 const Comment = require("./Comment");
 //Each User can have many Boards
 User.hasMany(Board, {
-  foreignKey: "userId",
-  onDelete: "CASCADE",
+    foreignKey: "userId",
+    onDelete: "CASCADE",
 });
 
 Board.belongsTo(User, {
-  foreignKey: "userId",
+    foreignKey: "userId",
 });
 
 //Each Board can have many Tasks
 Board.hasMany(Task, {
-  foreignKey: "boardId",
-  onDelete: "CASCADE",
+    foreignKey: "boardId",
+    onDelete: "CASCADE",
 });
 
 Task.belongsTo(Board, {
-  foreignKey: "boardId",
+    foreignKey: "boardId",
 });
 
 //Each User can have have many tasks
 User.hasMany(Task, {
-  foreignKey: "userId",
-  onDelete: "CASCADE",
+    foreignKey: "userId",
+    onDelete: "CASCADE",
 });
 
 Task.belongsTo(User, {
-  foreignKey: "userId",
+    foreignKey: "userId",
+});
+
+//Each User can have have many tasks
+User.hasMany(Comment, {
+    foreignKey: "userId",
+    onDelete: "CASCADE",
+});
+
+Comment.belongsTo(User, {
+    foreignKey: "userId",
 });
 //GM TO DO
 //One task has many comments
