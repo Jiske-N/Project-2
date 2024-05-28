@@ -7,7 +7,9 @@ const routes = require("./controllers");
 const userRoutes = require("./controllers/api/userRoutes");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
+
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 const sess = {
     secret: process.env.SECRET,
@@ -26,7 +28,6 @@ const sess = {
 
 app.use(session(sess));
 
-const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create({});
 
