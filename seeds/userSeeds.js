@@ -4,23 +4,26 @@ const userData = [
     {
         name: "John Doe",
         email: "john@gmail.com",
-        password: "password1"
+        password: "Password1234!",
     },
     {
         name: "Bob Williams",
         email: "bob@gmail.com",
-        password: "password1"
+        password: "Password1234!",
     },
     {
         name: "Shannon Jackson",
         email: "shannon@gmail.com",
-        password: "password1"
+        password: "Password1234!",
     },
 ];
 
 const seedUsers = async () => {
     console.log("seedUsers function started");
-    User.bulkCreate(userData);
+    User.bulkCreate(userData, {
+        individualHooks: true,
+        returning: true,
+    });
 };
 
 module.exports = seedUsers;

@@ -4,6 +4,7 @@
     <main class="container">
       <header class="header">
         <h1 class="title">Task Board</h1>
+
       </header>
       <section class="boards">
         {{#each boards}}
@@ -27,4 +28,6 @@
           </div>
         {{/each}}
       </section>
+      {{!-- Add task button - for the popup --}}
+      {{> task-popup}}
     </main>
