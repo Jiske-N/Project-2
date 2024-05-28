@@ -1,34 +1,23 @@
-
-    {{!-- <div class="container">
-        <h1>Login to Task Board</h1>
-        <form action="/login" method="post">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div> --}}
-
-<h1>{{title}}</h1>
-<form action='/api/users' method='post' class='mb-4'>
-  <div class='form-group'>
-    <label for='name'>Name</label>
-    <input type='text' name='name' class='form-control' />
+<div class="container bg-dark">
+<div class="card mt-4">
+  <h5 class="card-header bg-success text-white">Login</h5>
+<form class="card-body" id="login-form">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email">
+    <div class="form-text">We'll never share your email with anyone else.</div>
   </div>
-  <div class='form-group'>
-    <label for='email'>Email</label>
-    <input type='email' name='email' class='form-control' />
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password">
   </div>
-  <input type='submit' value='Add user' class='btn btn-primary btn-block' />
+  <div class="mb-3">
+  <button type="submit" class="btn btn-primary form-control">Login!</button>
+  </div>
+
+  <a href="/signup">Sign up instead</a>
 </form>
-<ul class='list-group'>
-  {{#each users}}
-    <li class='list-group-item'>{{this.name}}: {{this.email}}</li>
-  {{/each}}
+</div>
+</div>
 
-</ul>
+<script src="/js/login.js"></script>
