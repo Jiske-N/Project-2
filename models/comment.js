@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+
 // Create Comment model and datatypes. 
 class Comment extends Model {}
 
@@ -12,30 +13,30 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    comment: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+  },
     date_created: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
     user_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
-      // references: {
-      //   model: user,
-      //   key: id
-      // }
-    },
-    comment: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+      references: {
+        model: "user",
+        key: "id"
+      }
     },
     task_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        // references: {
-        //     model: task,
-        //     key: id
-        // }
+        references: {
+            model: "task",
+            key: "id"
+        }
     }
   },
   {

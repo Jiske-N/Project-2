@@ -1,10 +1,14 @@
 const router = require("express").Router();
 const { User } = require("../../models/User");
 
+const userController = require("../userController");
+
+// create new user
 router.post("/", async (req, res) => {
     try {
+        // console.log('userRoutes createNew started');
         const userData = await User.create(req.body);
-
+        // console.log('userRoutes createNew', userData);
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
@@ -16,6 +20,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+// existing user login
 router.post("/login", async (req, res) => {
     try {
         const userData = await User.findOne({
@@ -49,6 +54,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// user logout
 router.post("/logout", (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
@@ -58,5 +64,9 @@ router.post("/logout", (req, res) => {
         res.status(404).end();
     }
 });
+
+// Route to sign up a new user
+// the post route on line 6 should do this
+router.post("/signup", userController.signUp);
 
 module.exports = router;

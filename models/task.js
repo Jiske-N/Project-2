@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const User = require('./User')
+
 
 // Create Task model and datatypes. 
 class Task extends Model {}
@@ -27,11 +27,11 @@ Task.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
-      // allowNull: false,
-      // references: {
-      //   model: user,
-      //   key: id
-      // }
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id"
+      }
     },
     due_date: {
         type: DataTypes.DATE,
