@@ -1,55 +1,53 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-const User = require('./User'); 
-const task = require('./Task'); 
+// const User = require('./User');
+// const task = require('./Task');
 
-// Create Comment model and datatypes. 
+// Create Comment model and datatypes.
 class Comment extends Model {}
 
 Comment.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    user_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      references: {
-        model: User,
-        key: 'id',
-      },
-    },
-    comment: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
-    task_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: task,
-            key: 'id',
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
         },
+        date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "user",
+                key: "id",
+            },
+        },
+        comment: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        task_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "task",
+                key: "id",
+            },
+        },
+    },
+    {
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: "comment",
     }
-  },
-  {
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'comment',
-  }
 );
 
 module.exports = Comment;
-
-
