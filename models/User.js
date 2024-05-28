@@ -5,7 +5,7 @@ const argon2 = require("argon2");
 class User extends Model {
     checkPassword(loginPw) {
         try {
-            return argon2.verify(loginPw, this.password);
+            return argon2.verify(this.password, loginPw);
         } catch (error) {
             console.log("Error with user-checkpassword models/user.js", error);
         }
