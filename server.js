@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
+const userRoutes = require("./controllers/api/userRoutes");
 const sequelize = require("./config/connection");
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use(routes);
+app.use('/api', userRoutes);
 
 // Sync database + start server
 sequelize.sync({ force: false }).then(() => {

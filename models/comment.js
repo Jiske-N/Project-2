@@ -1,6 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+const User = require('./User'); 
+const task = require('./Task'); 
+
 // Create Comment model and datatypes. 
 class Comment extends Model {}
 
@@ -21,9 +24,9 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
       references: {
-        model: user,
-        key: id
-      }
+        model: User,
+        key: 'id',
+      },
     },
     comment: {
         type: DataTypes.TEXT,
@@ -34,8 +37,8 @@ Comment.init(
         allowNull: false,
         references: {
             model: task,
-            key: id
-        }
+            key: 'id',
+        },
     }
   },
   {

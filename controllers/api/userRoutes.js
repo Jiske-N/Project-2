@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User } = require("../../models/User");
 
+const userController = require("../userController");
+
 router.post("/", async (req, res) => {
     try {
         const userData = await User.create(req.body);
@@ -58,5 +60,8 @@ router.post("/logout", (req, res) => {
         res.status(404).end();
     }
 });
+
+// Route to sign up a new user
+router.post('/signup', userController.signUp);
 
 module.exports = router;
