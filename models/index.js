@@ -15,14 +15,14 @@ const List = require('./List');
 // });
 
 //Each Board can have many Tasks
-Board.hasMany(Task, {
-    foreignKey: "board_id",
-    onDelete: "CASCADE",
-});
+// Board.hasMany(Task, {
+//     foreignKey: "board_id",
+//     onDelete: "CASCADE",
+// });
 
-Task.belongsTo(Board, {
-    foreignKey: "board_id",
-});
+// Task.belongsTo(Board, {
+//     foreignKey: "board_id",
+// });
 
 //Each User can have have many tasks
 User.hasMany(Task, {
@@ -50,6 +50,14 @@ Board.hasMany(List, {
 
 List.belongsTo(Board, {
     foreignKey: "board_id"
+})
+
+List.hasMany(Task, {
+    foreignKey: 'list_id'
+})
+
+Task.belongsTo(List, {
+    foreignKey: "list_id"
 })
 //GM TO DO
 //One task has many comments

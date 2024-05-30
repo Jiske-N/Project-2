@@ -5,7 +5,7 @@
         "user_id": 1,
         "due_date": "11/06/2024",
         "status": "To Do",
-        "board_id": 1
+        "list_id": 1
     },
     {
         "title": "Create a new Task",
@@ -13,7 +13,7 @@
         "user_id": 1,
         "due_date": "11/06/2024",
         "status": "To Do",
-        "board_id": 1
+        "list_id": 1
     },
     {
         "title": "Task is in progress",
@@ -21,7 +21,7 @@
         "user_id": 1,
         "due_date": "11/06/2024",
         "status": "In Progress",
-        "board_id": 1
+        "list_id": 2
     },
     {
         "title": "Complete a task",
@@ -29,6 +29,6 @@
         "user_id": 1,
         "due_date": "11/06/2024",
         "status": "Completed",
-        "board_id": 1
+        "list_id": 3
     }
 ]

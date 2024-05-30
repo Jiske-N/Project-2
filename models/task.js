@@ -32,11 +32,19 @@ Task.init(
                 key: "id",
             },
         },
-        board_id: {
+        // board_id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false, 
+        //     references: {
+        //         model: 'board',
+        //         key: 'id'
+        //     }
+        // },
+        list_id: {
             type: DataTypes.INTEGER,
-            allowNull: false, 
+            allowNull:false,
             references: {
-                model: 'board',
+                model: 'list',
                 key: 'id'
             }
         },

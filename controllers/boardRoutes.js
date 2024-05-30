@@ -12,27 +12,31 @@ router.get("/", async (req, res) => {
     const boardsData = await Board.findAll();
     const boards = boardsData.map((board) => board.get({ plain: true }));
 
-  //Get all the lists for that board  (remove when above task completed)
+  // //Get all the lists for that board  (remove when above task completed)
     const listsData = await List.findAll({
       where: {
         board_id: boards[0].id
+      },
+      include: {
+        model: Task
       }
     });
     const lists = listsData.map((list) => list.get({ plain: true }));
 
-    const taskData = await Task.findAll({
-      where: {
-        board_id: boards[0].id
-      }
-    });
+    console.log(lists.tasks)
 
-    const tasks = taskData.map((task) => task.get({ plain: true }));
+  //   const taskData = await Task.findAll({
+  //     where: {
+  //       board_id: boards[0].id
+  //     }
+  //   });
+
+  //   const tasks = taskData.map((task) => task.get({ plain: true }));
 
 
     //Get all the tasks for the board
     res.render("board", { 
-   lists,
-   tasks
+   lists
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
