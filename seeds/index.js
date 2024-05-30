@@ -9,7 +9,7 @@ const seedDatabase = async () => {
     await seedUsers();
     console.log("\n Users Seeded \n");
 
-     //process.exit(0);
+    process.exit(0);
 };
 
 seedDatabase();
