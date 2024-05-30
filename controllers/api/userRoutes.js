@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
-const signupRoutes = require("../signupRoutes");
+// const signupRoutes = require("../signupRoutes");
 
 // create new user
 router.post('/signup', async (req, res) => {
@@ -10,7 +10,7 @@ router.post('/signup', async (req, res) => {
         res.json(userData)
       
     } catch (err) {
-      res.status(400).json(err);
+      res.status(400).json({ message: "Signup error" });
     }
   })
 
