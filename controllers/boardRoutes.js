@@ -7,8 +7,6 @@ router.get("/", async (req, res) => {
 
   try {
     //Get all the boards(only need 1 currently) - 
-    //TODO - edit for only a single board
-    //TODO - link the tasks and lists to Board so only have to call Board (include List & Task)
     const boardsData = await Board.findAll();
     const boards = boardsData.map((board) => board.get({ plain: true }));
 
@@ -23,17 +21,9 @@ router.get("/", async (req, res) => {
     });
     const lists = listsData.map((list) => list.get({ plain: true }));
 
-    console.log(lists.tasks)
-
-  //   const taskData = await Task.findAll({
-  //     where: {
-  //       board_id: boards[0].id
-  //     }
-  //   });
-
-  //   const tasks = taskData.map((task) => task.get({ plain: true }));
-
-
+router.get('/task', async (req, res) => {
+  console.log("something")
+})
     //Get all the tasks for the board
     res.render("board", { 
    lists
