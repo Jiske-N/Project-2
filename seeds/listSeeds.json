@@ -1,0 +1,14 @@
+[
+    {
+        "name": "To do",
+        "board_id": 1
+    },
+    {
+        "name": "In Progress",
+        "board_id": 1
+    },
+    {
+        "name": "Completed",
+        "board_id": 1
+    }
+]
