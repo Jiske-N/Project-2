@@ -1,0 +1,34 @@
+ [
+    {
+        "title": "Create a new list",
+        "description": "Lists are the columns for the tasks",
+        "user_id": 1,
+        "due_date": "11/06/2024",
+        "status": "To Do",
+        "list_id": 1
+    },
+    {
+        "title": "Create a new Task",
+        "description": "Tasks live in the lists",
+        "user_id": 1,
+        "due_date": "11/06/2024",
+        "status": "To Do",
+        "list_id": 1
+    },
+    {
+        "title": "Task is in progress",
+        "description": "Tasks can be moved between lists",
+        "user_id": 1,
+        "due_date": "11/06/2024",
+        "status": "In Progress",
+        "list_id": 2
+    },
+    {
+        "title": "Complete a task",
+        "description": "This column is for completed tasks",
+        "user_id": 1,
+        "due_date": "11/06/2024",
+        "status": "Completed",
+        "list_id": 3
+    }
+]

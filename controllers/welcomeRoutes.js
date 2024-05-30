@@ -6,10 +6,10 @@ router.get('/', async (req, res) => {
   res.render('welcome');
 });
 
-//GET the board route
-router.get('/board', async (req, res) => {
-  res.render('board')
-})
+// //GET the board route
+// router.get('/board', async (req, res) => {
+//   res.render('board')
+// })
 
 
 

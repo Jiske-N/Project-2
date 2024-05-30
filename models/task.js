@@ -1,9 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-// Import the User model
-// const User = require("./User");
-
 // Create Task model and datatypes.
 class Task extends Model {}
 
@@ -29,11 +26,27 @@ Task.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            // allowNull: false,
+            allowNull: false,
             references: {
                 model: "user",
                 key: "id",
             },
+        },
+        // board_id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false, 
+        //     references: {
+        //         model: 'board',
+        //         key: 'id'
+        //     }
+        // },
+        list_id: {
+            type: DataTypes.INTEGER,
+            allowNull:false,
+            references: {
+                model: 'list',
+                key: 'id'
+            }
         },
         due_date: {
             type: DataTypes.DATE,

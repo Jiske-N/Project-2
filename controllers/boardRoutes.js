@@ -1,17 +1,43 @@
 const express = require("express");
 const router = express.Router();
-const { Board, Task } = require("../models");
+const { Board, List, Task } = require("../models");
 
-// Get all boards with their tasks
+// Get all boards with their associated  tasks
 router.get("/", async (req, res) => {
-  try {
-    const boardsData = await Board.findAll({
-      include: [{ model: Task }],
-    });
 
+  try {
+    //Get all the boards(only need 1 currently) - 
+    //TODO - edit for only a single board
+    //TODO - link the tasks and lists to Board so only have to call Board (include List & Task)
+    const boardsData = await Board.findAll();
     const boards = boardsData.map((board) => board.get({ plain: true }));
 
-    res.render("board", { boards });
+  // //Get all the lists for that board  (remove when above task completed)
+    const listsData = await List.findAll({
+      where: {
+        board_id: boards[0].id
+      },
+      include: {
+        model: Task
+      }
+    });
+    const lists = listsData.map((list) => list.get({ plain: true }));
+
+    console.log(lists.tasks)
+
+  //   const taskData = await Task.findAll({
+  //     where: {
+  //       board_id: boards[0].id
+  //     }
+  //   });
+
+  //   const tasks = taskData.map((task) => task.get({ plain: true }));
+
+
+    //Get all the tasks for the board
+    res.render("board", { 
+   lists
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -38,8 +64,8 @@ router.get("/:id", async (req, res) => {
 // Create a new board
 router.post("/", async (req, res) => {
   try {
-    const { name, userId } = req.body;
-    const newBoard = await Board.create({ name, userId });
+    const { name, user_id } = req.body;
+    const newBoard = await Board.create({ name, user_id });
     res.status(200).json(newBoard);
   } catch (error) {
     res.status(500).json({ error: error.message });

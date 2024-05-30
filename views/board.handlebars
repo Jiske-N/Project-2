@@ -7,7 +7,7 @@
 
       </header>
       <section class="boards">
-        {{#each boards}}
+        {{!-- {{#each boards}}
           <div class="board">
             <header class="board-header">
               <h3 class="board-title">{{this.name}}</h3>
@@ -26,8 +26,29 @@
               {{/each}}
             </section>
           </div>
+        {{/each}} --}}
+
+
+      </section>
+      <section class="list-container">
+                {{#each lists as |List|}}
+        <div class="list">
+    <h2>{{name}}</h2>
+    <div class="task-wrapper">
+      {{> task-details}}
+
+
+
+    </div>
+
+
+</div>
         {{/each}}
       </section>
       {{!-- Add task button - for the popup --}}
       {{> task-popup}}
+
+      {{!-- TEMP BUTTON - testing the edit popup--}}
+      {{> edit-task-popup}}
+
     </main>

@@ -10,7 +10,7 @@ router.use("/", welcomeRoutes);
 router.use("/login", loginRoutes);
 router.use("/signup", signupRoutes);
 router.use("/api", apiRoutes);
-router.use("/board", boardRoutes);
+router.use('/board', boardRoutes);
 // router.use("/signup", userController);
 router.use("/account", accountRoutes);
 module.exports = router;

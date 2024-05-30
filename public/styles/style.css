@@ -1,7 +1,8 @@
 :root {
     --main-blue: #003459;
     --main-black: #242323;
-    --main-wite: #f2f2f2;
+    --main-white: #f2f2f2;
+    --border: #ccc;
 }
 
 /* public/styles/style.css */
@@ -40,7 +41,7 @@ input[type="text"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 5px;
 }
 
@@ -66,3 +67,40 @@ input[type="password"] {
     opacity: 0.8;
 }
 
+
+/*-------------TASK POPUP-------------*/
+
+.modal-header {
+    border: none;
+}
+
+.modal-body {
+    label {
+        text-align: left;
+    }
+    textarea, input, select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+    }
+}
+
+
+/*-------------LISTS-------------*/
+.list-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.list {
+    min-width: 400px;
+    min-height: 600px;
+    height: 100%;
+    background-color: var(--main-blue);
+    border-radius: 12px;
+    margin: 2rem;
+    h2 {
+        color: white;
+    }
+}
