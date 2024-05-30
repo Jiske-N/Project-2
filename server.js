@@ -4,7 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
-const userRoutes = require("./controllers/api/userRoutes");
+// const userRoutes = require("./controllers/api/userRoutes");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use(routes);
-app.use("/api", userRoutes);
+// app.use("/api", userRoutes);
 
 // Sync database + start server
 sequelize.sync({ force: false }).then(() => {

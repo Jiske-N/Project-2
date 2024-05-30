@@ -1,30 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up for Task Board</title>
-    <link rel="stylesheet" href="./styles/style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Sign Up for Task Board</h1>
-        <form action="/signup" method="post">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-                       <div class="form-group">
-                <label for="email">email</label>
-                <input type="text" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </form>
-    </div>
-</body>
+<div class="container bg-dark">
+<div class="card mt-4">
+  <h5 class="card-header bg-success text-white">Signup</h5>
+<form class="card-body" id="signup-form">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email">
+    <div class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="username" class="form-control" id="username">
+    <div class="form-text">Be unique! Make a username.</div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password">
+  </div>
+  <div class="mb-3">
+  <button type="submit" class="btn btn-primary form-control">Signup!</button>
+  </div>
+
+  <a href="/login">Login instead</a>
+</form>
+</div>
+</div>
+
 <script src="/js/signup.js"></script>
-</html>
