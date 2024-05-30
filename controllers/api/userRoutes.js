@@ -4,15 +4,14 @@ const { User } = require("../../models");
 // const signupRoutes = require("../signupRoutes");
 
 // create new user
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
-      const userData = await User.create(req.body);
-        res.json(userData)
-      
+        const userData = await User.create(req.body);
+        res.json(userData);
     } catch (err) {
-      res.status(400).json({ message: "Signup error" });
+        res.status(400).json(err);
     }
-  })
+});
 
 // existing user login
 router.post("/login", async (req, res) => {
@@ -53,6 +52,54 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// change username
+router.put("/new-username", async (req, res) => {
+    try {
+        const userData = await User.update(
+            {
+                name: req.body.newUsername,
+            },
+            { where: { id: req.session.user_id } }
+        );
+
+        res.status(200).json(userData);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+// change email
+router.put("/new-email", async (req, res) => {
+    try {
+        const userData = await User.update(
+            {
+                email: req.body.newEmail,
+            },
+            { where: { id: req.session.user_id } }
+        );
+
+        res.status(200).json(userData);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+// change password
+router.put("/new-password", async (req, res) => {
+    try {
+        const userData = await User.update(
+            {
+                name: req.body.newPassword,
+            },
+            { where: { id: req.session.user_id } }
+        );
+
+        res.status(200).json(userData);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
 // user logout
 router.post("/logout", (req, res) => {
     if (req.session.logged_in) {
@@ -63,7 +110,5 @@ router.post("/logout", (req, res) => {
         res.status(404).end();
     }
 });
-
-
 
 module.exports = router;
