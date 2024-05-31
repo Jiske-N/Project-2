@@ -8,6 +8,10 @@ const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
+
+// const signupRoutes = require("./controllers/signupRoutes");
+// const userRoutes = require("./controllers/api/userRoutes");
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -42,6 +46,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.use(routes);
 // app.use("/api", userRoutes);
+// app.use("/signup", signupRoutes);
 
 // Sync database + start server
 sequelize.sync({ force: false }).then(() => {
