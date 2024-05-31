@@ -1,9 +1,10 @@
 const sequelize = require("../config/connection");
 
-const { User, Board, List, Task } = require('../models');
+const { User, Board, List, Task, Comment } = require('../models');
 const seedUsers = require("./userSeeds.json");
 const seedLists = require('./listSeeds.json');
 const seedTasks = require('./taskSeeds.json');
+const seedComments = require('./commentSeeds.json');
 
 const seedDatabase = async () => {
     console.log("Seed file initialising");
@@ -34,6 +35,13 @@ const seedDatabase = async () => {
         await Task.create({
           ...task,
           user_id: users[Math.floor(Math.random() * users.length)].id,
+
+        });
+      }
+
+      for (const comment of seedComments) {
+        await Comment.create({
+          ...comment,
 
         });
       }

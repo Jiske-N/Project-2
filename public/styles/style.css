@@ -14,6 +14,8 @@ body {
     background-color: #f2f2f2;
 }
 
+/* ---------------MAIN COMPONENTS-----------*/
+
 .container {
     max-width: 100%;
     margin: 50px auto;
@@ -45,6 +47,21 @@ input[type="password"] {
     border-radius: 5px;
 }
 
+button {
+    background-color: var(--main-blue);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    color: white;
+    font-weight: 700;
+    border: none;
+}
+
+button:hover {
+    opacity:0.7;
+    cursor: pointer;
+}
+
 .btn {
     padding: 10px 20px;
     border: none;
@@ -68,13 +85,21 @@ input[type="password"] {
 }
 
 
+
+
 /*-------------TASK POPUP-------------*/
 
 .modal-header {
     border: none;
+    /* align-items: center; */
+}
+.modal-content {
+    border-radius: 8px;
+    padding-bottom: 2rem;
 }
 
-.modal-body {
+.modal-body, .comment-body {
+    padding: 0 1rem;
     label {
         text-align: left;
     }
@@ -83,17 +108,72 @@ input[type="password"] {
         padding: 10px;
         border: 1px solid var(--border);
         border-radius: 5px;
+        background-color: lightgray;
+    }
+    textarea.new-comment {
+        height: 2.5rem;
+        padding: 5px;
     }
 }
 
-
-/*-------------LISTS-------------*/
-.list-container {
-    display: flex;
-    flex-direction: row;
+.fa-pencil {
+    margin-top: 0.6rem;
+}
+.fa-align-left, .fa-calendar-days, .fa-comment {
+    margin-top: 0.2rem;
+}
+.fa-solid {
+    font-size: 18px;
 }
 
+[id*="editTask"] {
+    input.task-title {
+        border: none;
+        padding: 5px 5px 0;
+    }
+    i {
+        margin-right: 1rem;
+    }
+    .list-text {
+        font-size: 12px;
+        margin-left:0.5rem;
+        margin-bottom: 0;
+    }
+    .form-group {
+        width: 100%;
+    }
+}
+
+/* #edit-task-save {
+    background-color: var(--main-blue);
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+    margin-top: 0.5rem;
+    color: white;
+    font-weight: 600;
+} */
+
+#edit-task-save:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.delete-body {
+    display: flex;
+    padding: 1rem;
+    justify-content: flex-end;
+}
+.delete-task {
+    background-color: #CF222E;
+    color: #f4f4f4;
+}
+
+
+
+/*-------------LISTS-------------*/
+
 .list {
+    padding: 1rem;
     min-width: 400px;
     min-height: 600px;
     height: 100%;
@@ -104,3 +184,73 @@ input[type="password"] {
         color: white;
     }
 }
+
+.new-task-container {
+    margin-top: auto;
+}
+
+#add-task, .task-open {
+background-color: white;
+color: black;
+}
+
+
+/*-------------COMMENTS-------------*/
+.comment-container {
+    border-radius: 8px;
+    border: 1px solid gray;
+    width: 100%;
+    margin-right: 0.5rem;
+
+}
+.comment-inner {
+    padding: 0.5rem;
+}
+.comment-footer {
+    background-color: var(--main-blue);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    font-size: 11px;
+    border-radius: 0 0 8px 8px;
+}
+
+.save-comment {
+    display: none;
+}
+
+.comment-body {
+    padding: 0 0.5rem;
+    margin-top: 2rem;
+}
+.new-comment-group {
+    padding: 0 0.5rem;
+}
+.name-icon {
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    background-color: green;
+    color: white;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 5px;
+    margin-right: 0.5rem;
+    margin-left: 0.2rem
+}
+
+
+/*-------------GENERAL-------------*/
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+.text-left {
+    text-align: left;
+}
+

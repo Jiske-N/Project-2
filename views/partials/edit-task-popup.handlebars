@@ -1,9 +1,15 @@
-{{!-- {{> task-popup}} --}}
+{{! Task button }}
+<button
+  id="edit-task-{{id}}"
+  data-toggle="modal"
+  data-target="#editTask-{{id}}"
+  class="task-open"
+>{{title}}</button>
 
-<button id="edit-task" data-toggle="modal" data-target="#editTask">{{description}}</button>
+{{! Task Modal }}
 <div
   class="modal fade"
-  id="editTask"
+  id="editTask-{{id}}"
   tabindex="-1"
   role="dialog"
   aria-labelledby="task-popup"
@@ -12,6 +18,11 @@
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <i class="fa-solid fa-pencil"></i>
+        <div class="flex-col text-left">
+          {{{title_input title}}}
+          <p class="list-text">in list <b>{{status}}</b></p>
+        </div>
         <button
           type="button"
           class="close"
@@ -21,33 +32,49 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-left">
         <div class="form-group">
-          <label for="task-title">Task Title</label>
-          {{!-- <input class="form-input" type="text" id="task-title" /> --}}
-          {{{title_input title}}}
+
         </div>
-        <div class="form-group">
-          <label for="task-description">Description</label>
-          {{!-- <textarea class="form-input" id="task-description"></textarea> --}}
-          {{{content_input description}}}
+        <div class="description-group flex-row">
+          <i class="fa-solid fa-align-left"></i>
+          <div class="form-group">
+            <label for="task-description">Description</label>
+            {{{content_input description}}}
+          </div>
         </div>
-        <div class="form-group">
-          <label for="task-duedate">Due date</label>
-          {{!-- <input class="form-input" type="date" id="task-duedate" /> --}}
-          {{{date_input due_date}}}
+        <div class="flex-row text-left">
+          <i class="fa-solid fa-calendar-days"></i>
+          <div class="form-group">
+            <label for="task-duedate">Due date</label>
+            {{{date_input due_date}}}
+            <button id="edit-task-save" class="edit-task-save">Save</button>
+          </div>
         </div>
-        <label for="task-status">Status</label>
-        <select class="task-status" id="task-status">
-          {{! TO DO dynamically render column options }}
-          <option value="to do">To Do</option>
-          <option value="in progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-        <button id="task-save">Save</button>
+
+      </div>
+      
+      {{! Comment section }}
+      <div class="comment-body text-left">
+        <div class="new-comment-group flex-row">
+          <i class="fa-solid fa-comment"></i>
+          <div class="form-group">
+            <label for="task-description">Comments</label>
+            <textarea class="new-comment" id="new-comment" placeholder="Write a comment..."></textarea>
+            <button id="save-comment" class="save-comment">Post</button>
+          </div>
+        </div>
+        {{#each comments as |Comment|}}
+          {{> comment-details}}
+        {{/each}}
+      </div>
+
+      {{! Delete section }}
+      <div class="delete-body">
+        <button class="delete-task"><i class="fa-solid fa-trash"></i>Delete Task</button>
       </div>
     </div>
   </div>
 </div>
 
-{{!-- <script src="./js/createTask.js"></script> --}}
+

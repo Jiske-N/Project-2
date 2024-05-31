@@ -1,5 +1,6 @@
 const Handlebars = require("handlebars");
-const { format } = require("sequelize/lib/utils");
+const { List } = require("../models");
+const dayjs = require("dayjs");
 
 module.exports = {
   //Date format helper function
@@ -11,33 +12,51 @@ module.exports = {
   title_input: (value) => {
     const val = Handlebars.escapeExpression(value);
     return new Handlebars.SafeString(
-      "<input class='form-input' id='task-title' type='text' value='" + val + "'/>"
+      "<input class='form-input task-title' id='task-title' type='text' value='" +
+        val +
+        "'/>"
     );
   },
   //Adds in the existing value to the edit post page
   content_input: (value) => {
     const val = Handlebars.escapeExpression(value);
     return new Handlebars.SafeString(
-      "<textarea class='form-input' id='task-description' >" + val + "</textarea>"
+      "<textarea class='form-input' id='task-description' >" +
+        val +
+        "</textarea>"
     );
   },
-
+  //Formats the date and adds it to the due date input
   date_input: (value) => {
     if (value !== undefined) {
-        const newDate = value.toLocaleDateString();
-        const val = Handlebars.escapeExpression(newDate);
-    
-        return new Handlebars.SafeString(
-            "<input class='form-input' id='task-duedate' type='date' value='" + val + "'/>"
-        );
-    
+      const date = dayjs(value).format("YYYY-MM-DD");
+
+      const val = Handlebars.escapeExpression(date);
+
+      return new Handlebars.SafeString(
+        "<input class='form-input' id='task-duedate' type='date' value='" +
+          val +
+          "'/>"
+      );
     }
   },
+  create_icon: (name) => {
+    const names = name.split(" ");
+    const nameLetters = []
+    for (let i = 0; i < names.length; i++) {
+      let firstLetter = names[i][0];
+      nameLetters.push(firstLetter)
+    }
 
-//   status_input: (value) => {
-//     const val = Handlebars.escapeExpression(value);
-//     return new Handlebars.SafeString(
-//       "<textarea class='form-input' id='post-content' >" + val + "</textarea>"
-//     );
-//   }
+    if (nameLetters.length === 2) {
+      const nameIcon = `${nameLetters[0]}${nameLetters[1]}`
+      return nameIcon
+    }
+  }
+
+
+
+
+
+
 };

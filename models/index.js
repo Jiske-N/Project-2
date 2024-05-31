@@ -14,54 +14,48 @@ const List = require('./List');
 //     foreignKey: "user_id",
 // });
 
-//Each Board can have many Tasks
-// Board.hasMany(Task, {
-//     foreignKey: "board_id",
-//     onDelete: "CASCADE",
-// });
 
-// Task.belongsTo(Board, {
-//     foreignKey: "board_id",
-// });
 
 //Each User can have have many tasks
 User.hasMany(Task, {
     foreignKey: "user_id",
     onDelete: "CASCADE",
 });
-
 Task.belongsTo(User, {
     foreignKey: "user_id",
 });
 
-//Each User can have have many tasks
-User.hasMany(Comment, {
-    foreignKey: "user_id",
-    onDelete: "CASCADE",
-});
-
-Comment.belongsTo(User, {
-    foreignKey: "user_id",
-});
-
+//One board has many lists
 Board.hasMany(List, {
     foreignKey: 'board_id'
 })
-
 List.belongsTo(Board, {
     foreignKey: "board_id"
 })
 
+//One list has many tasks
 List.hasMany(Task, {
     foreignKey: 'list_id'
 })
-
 Task.belongsTo(List, {
     foreignKey: "list_id"
 })
-//GM TO DO
+
 //One task has many comments
-//One comment has one task
-//One task has many tags
-//One tag can have many tasks (many to many)
+Task.hasMany(Comment, {
+    foreignKey: 'task_id'
+})
+Comment.belongsTo(Task, {
+    foreignKey: "task_id"
+})
+
+//Each User can have have many comments
+User.hasMany(Comment, {
+    foreignKey: "user_id",
+    onDelete: "CASCADE",
+});
+Comment.belongsTo(User, {
+    foreignKey: "user_id",
+});
+
 module.exports = { User, Board, Task, Tag, Comment, List };

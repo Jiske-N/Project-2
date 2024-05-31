@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Board, List, Task } = require("../models");
+const { Board, List, Task, Comment, User } = require("../models");
 
 // Get all boards with their associated  tasks
 router.get("/", async (req, res) => {
@@ -16,14 +16,18 @@ router.get("/", async (req, res) => {
         board_id: boards[0].id
       },
       include: {
-        model: Task
+        model: Task,
+        include: {
+          model: Comment,
+          include: {
+            model: User
+          }
+        }
       }
     });
     const lists = listsData.map((list) => list.get({ plain: true }));
+    
 
-router.get('/task', async (req, res) => {
-  console.log("something")
-})
     //Get all the tasks for the board
     res.render("board", { 
    lists

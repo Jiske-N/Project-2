@@ -1,6 +1,6 @@
 {{!-- {{> task-popup}} --}}
 
-<button id="add-task" data-toggle="modal" data-target="#myModal">New Task</button>
+<button id="add-task" data-toggle="modal" data-target="#myModal{{id}}"><i class="fa-solid fa-plus"></i> Add Task</button>
 <div
   class="modal fade"
   id="myModal{{id}}"
@@ -12,6 +12,7 @@
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <p id={{id}} class="list-name">Adding to list: <b>{{name}}</b></p>
         <button
           type="button"
           class="close"
@@ -24,27 +25,20 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="task-title">Task title</label>
-          <input class="form-input" type="text" id="task-title" />
+          <input class="form-input" type="text" id="task-title-new" />
         </div>
         <div class="form-group">
           <label for="task-description">Description</label>
-          <textarea class="form-input" id="task-description"></textarea>
+          <textarea class="form-input" id="task-description-new"></textarea>
         </div>
         <div class="form-group">
           <label for="task-duedate">Due date</label>
-          <input class="form-input" type="date" id="task-duedate" />
+          <input class="form-input" type="date" id="task-duedate-new" />
         </div>
-        <label for="task-status">Status</label>
-        <select class="task-status" id="task-status">
-          {{! TO DO dynamically render column options }}
-          <option value="to do">To Do</option>
-          <option value="in progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-        <button id="task-save">Save</button>
+
+        <button id="task-save">Add Task</button>
       </div>
     </div>
   </div>
 </div>
 
-<script src="./js/createTask.js"></script>
