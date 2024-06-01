@@ -9,6 +9,7 @@ const checkAuthorisation = require("../utils/authorisation");
 router.get("/", checkAuthorisation, async (req, res) => {
     console.log("accountRoutes", "initialising");
     try {
+        const username = req.session.username;
         const userId = req.session.user_id;
 
         const userData = await User.findByPk(userId);
@@ -19,6 +20,7 @@ router.get("/", checkAuthorisation, async (req, res) => {
 
         res.render("accountSettings", {
             user,
+            username,
             header_title: "Account Settings",
             logged_in: req.session.logged_in,
         });

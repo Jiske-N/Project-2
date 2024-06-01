@@ -58,6 +58,7 @@ User.init(
                     newUserData.password = await argon2.hash(
                         newUserData.password
                     );
+                    console.log(updatedUserData);
                     return newUserData;
                 } catch (error) {
                     console.log(
@@ -71,6 +72,7 @@ User.init(
                     updatedUserData.password = await argon2.hash(
                         updatedUserData.password
                     );
+                    console.log(updatedUserData);
                     return updatedUserData;
                 } catch (error) {
                     console.log(

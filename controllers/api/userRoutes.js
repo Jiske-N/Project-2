@@ -58,6 +58,7 @@ router.post("/login", async (req, res) => {
 // change username
 router.put("/new-username", async (req, res) => {
     try {
+        console.log(req.body.newUsername);
         const userData = await User.update(
             {
                 name: req.body.newUsername,
@@ -88,16 +89,29 @@ router.put("/new-email", async (req, res) => {
 });
 
 // change password
+// router.put("/new-password", async (req, res) => {
+//     try {
+//         const userData = await User.update(
+//             {
+//                 password: req.body.newPassword,
+//             },
+//             { where: { id: req.session.user_id } }
+//         );
+
+//         res.status(200).json(userData);
+//     } catch (error) {
+//         res.status(500).json(error);
+//     }
+// });
 router.put("/new-password", async (req, res) => {
     try {
-        const userData = await User.update(
-            {
-                name: req.body.newPassword,
-            },
-            { where: { id: req.session.user_id } }
-        );
-
-        res.status(200).json(userData);
+        const user = await User.findByPk(req.session.user_id);
+        if (user) {
+            await user.update({ password: req.body.newPassword });
+            res.status(200).json({ message: "Password updated successfully" });
+        } else {
+            res.status(404).json({ message: "User not found" });
+        }
     } catch (error) {
         res.status(500).json(error);
     }
