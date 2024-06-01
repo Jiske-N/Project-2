@@ -5,21 +5,21 @@ const handleSignupForm = async (submission) => {
     console.log("signupjs", submission);
     //   collect signup data
     const email = document.querySelector("#email").value.trim();
-    const username = document.querySelector("#username").value.trim();
+    const name = document.querySelector("#username").value.trim();
     const password = document.querySelector("#password").value.trim();
-    console.log(email, username, password)
-    if (email && username && password) {
-        console.log("signups", email, username, password);
+    console.log(email,name, password)
+    if (email && name && password) {
+        console.log("signups", email, name, password);
         const response = await fetch("/api/users/signup", {
             method: "POST",
-            body: JSON.stringify({ email, username, password }),
+            body: JSON.stringify({ email, name, password }),
             headers: { "Content-Type": "application/json" },
         });
 
         if (response.ok) {
             document.location.replace("/");
         } else {
-            alert(response.statusText);
+            alert("incorrect user name or email");
         }
     }
 };

@@ -6,12 +6,15 @@ const signupRoutes = require("../signupRoutes");
 // create new user
 router.post("/signup", async (req, res) => {
     try {
+        console.log("this is reckedup body ",req.body);
         const userData = await User.create(req.body);
         res.json(userData);
     } catch (err) {
+        console.log(err);
         res.status(400).json(err);
     }
 });
+
 
 // existing user login
 router.post("/login", async (req, res) => {
