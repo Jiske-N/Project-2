@@ -30,25 +30,23 @@
 
 
       </section>
-      <section class="list-container">
-                {{#each lists as |List|}}
-        <div class="list">
-    <h2>{{name}}</h2>
-    <div class="task-wrapper">
-      {{> task-details}}
-
-
-
-    </div>
-
-
-</div>
+      <section class="list-container flex-row">
+        {{#each lists as |List|}}
+        <div class="list flex-col">
+          <h2>{{name}}</h2>
+            <div class="task-wrapper flex-col">
+              {{> task-details}}
+            </div>
+            <div class="new-task-container">
+            {{!-- Add task button at the bottom of each list --}}
+            {{> task-popup}}
+            </div>
+        </div>
         {{/each}}
       </section>
-      {{!-- Add task button - for the popup --}}
-      {{> task-popup}}
 
-      {{!-- TEMP BUTTON - testing the edit popup--}}
-      {{> edit-task-popup}}
+
 
     </main>
+    <script src="./js/createTask.js"></script>
+    <script src="./js/newComment.js"></script> 

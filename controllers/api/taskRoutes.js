@@ -1,16 +1,21 @@
 
 const router = require('express').Router();
-const { Task } = require('../../models');
+const { Task, List } = require('../../models');
 
 //POST route to create a new task
 router.post('/', async (req, res) => {
     try {
+        const listData = await List.findByPk(req.body.listId);
+        const list = listData.get({ plain: true });
+
+
         await Task.create({
             title: req.body.title,
             description: req.body.description,
             user_id: req.body.user,
             due_date: req.body.dueDate,
-            status: req.body.status
+            list_id: req.body.listId,
+            status: list.name
         }).then((newTask) => {
             res.json(newTask)
         })
@@ -27,7 +32,7 @@ router.post('/:id', async (req, res) => {
             description: req.body.description,
             user_id: req.body.user,
             due_date: req.body.dueDate,
-            status: req.body.status
+            list_id: req.body.listId
         })
     } catch (err) {
         console.error(err)

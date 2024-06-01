@@ -30,7 +30,6 @@ Comment.init(
                 key: "id",
             },
         },
-
         task_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
