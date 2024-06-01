@@ -6,7 +6,7 @@ const signupRoutes = require("../signupRoutes");
 // create new user
 router.post("/signup", async (req, res) => {
     try {
-        console.log("this is reckedup body ",req.body);
+        console.log("this is reckedup body ", req.body);
         const userData = await User.create(req.body);
         res.json(userData);
     } catch (err) {
@@ -14,7 +14,6 @@ router.post("/signup", async (req, res) => {
         res.status(400).json(err);
     }
 });
-
 
 // existing user login
 router.post("/login", async (req, res) => {
@@ -46,6 +45,7 @@ router.post("/login", async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
+            req.session.username = userData.name;
 
             res.json({ user: userData, message: "You are now logged in!" });
         });
