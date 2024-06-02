@@ -12,22 +12,29 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f2f2f2;
+    background-image: url('/assets/images/9402066.jpg');
+    background-color: transparent;
+    opacity: 0.9;
 }
 
 /* ---------------MAIN COMPONENTS-----------*/
 
 .container {
     max-width: 100%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
+    margin: 10px auto;
+    padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
+
 h1 {
     margin-bottom: 20px;
+}
+
+h2 {
+    font-style:italic;
 }
 
 .form-group {
@@ -84,7 +91,44 @@ button:hover {
     opacity: 0.8;
 }
 
+.nav-link {
+    font-style: var(--main-black);
+    color: #242323;
+}
 
+.sections-container {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 50px; 
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.section-1 {
+    flex: 0 0 48%; 
+    opacity: 0.8;
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 20px;
+    text-align: center;
+    font-style: italic;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+
+.section-2 {
+    flex: 0 0 48%; 
+    opacity: 0.8;
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 20px;
+    text-align: left;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+p {
+    font-size: 18px; 
+}
 
 
 /*-------------TASK POPUP-------------*/
