@@ -7,7 +7,8 @@ const signupRoutes = require("../signupRoutes");
 // create new user
 router.post("/signup", async (req, res) => {
     try {
-        console.log("this is reckedup body ", req.body);
+        console.log("this is req.body ",req.body);
+
         const userData = await User.create(req.body);
         res.json(userData);
     } catch (err) {

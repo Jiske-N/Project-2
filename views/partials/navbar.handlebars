@@ -1,11 +1,14 @@
 <!-- views/partials/navbar.handlebars -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    {{!-- <a class="navbar-brand" href="#">Task Board</a> --}}
-    
+ 
+
 <div class="container">
         <a class="navbar-brand" href="#">
             <img src="/assets/images/Screenshot.png" alt="Logo" height="30">
         </a>
+
+         <div class="collapse navbar-collapse" id="navbarNav">
+<!-- from before rasikas merge -->
                                 {{#if logged_in}}
                                         <div class="nav-item">
                       <p class="nav-link">{{username}}</p>
