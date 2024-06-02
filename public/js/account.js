@@ -45,14 +45,25 @@ const handleChangeEmail = async (submission) => {
 const handleChangePassword = async (submission) => {
     submission.preventDefault();
 
-    //   collect new password
-    const newPassword = document.querySelector("#password").value.trim();
-    console.log("accountjs", newPassword);
-    if (newPassword) {
-        console.log("accountjs", newPassword);
+    //   collect current, new and confirmed passwords
+    const currentPassword = document
+        .querySelector("#current-password")
+        .value.trim();
+    const newPassword = document.querySelector("#new-password").value.trim();
+    const confirmPassword = document
+        .querySelector("#confirm-password")
+        .value.trim();
+
+    // // enter error messages for each case of missing data
+    // if (!currentPassword || !newPassword || !confirmPassword) {
+    //     throw console.error("blah");
+    // }
+    console.log("accountjs", currentPassword, newPassword, confirmPassword);
+    if (newPassword === confirmPassword) {
+        console.log("accountjs", "Match");
         const response = await fetch("/api/users/new-password", {
             method: "PUT",
-            body: JSON.stringify({ newPassword }),
+            body: JSON.stringify({ currentPassword, newPassword }),
             headers: { "Content-Type": "application/json" },
         });
 

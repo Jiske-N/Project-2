@@ -90,26 +90,25 @@ router.put("/new-email", checkAuthorisation, async (req, res) => {
 });
 
 // change password
-// router.put("/new-password", async (req, res) => {
-//     try {
-//         const userData = await User.update(
-//             {
-//                 password: req.body.newPassword,
-//             },
-//             { where: { id: req.session.user_id } }
-//         );
-
-//         res.status(200).json(userData);
-//     } catch (error) {
-//         res.status(500).json(error);
-//     }
-// });
 router.put("/new-password", checkAuthorisation, async (req, res) => {
     try {
-        const user = await User.findByPk(req.session.user_id);
-        if (user) {
-            await user.update({ password: req.body.newPassword });
-            res.status(200).json({ message: "Password updated successfully" });
+        const userData = await User.findByPk(req.session.user_id);
+
+        if (userData) {
+            const validatePassword = await userData.checkPassword(
+                req.body.currentPassword
+            );
+            if (!validatePassword) {
+                res.status(400).json({
+                    message: "Incorrect password, please try again",
+                });
+                return;
+            } else {
+                await userData.update({ password: req.body.newPassword });
+                res.status(200).json({
+                    message: "Password updated successfully",
+                });
+            }
         } else {
             res.status(404).json({ message: "User not found" });
         }
