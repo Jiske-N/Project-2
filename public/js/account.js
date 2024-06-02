@@ -116,24 +116,31 @@ const handleChangePassword = async (submission) => {
 //     }
 // };
 
+// ask tri should I put the password validation here as well to allow setting a message or is that a nono as it exposes things on the front end?
 // check new and confirm password fields match
-function checkMatch(submission) {
+function checkNewPassword(submission) {
     submission.preventDefault();
 
-    var input = document.getElementById("confirm-password");
-    if (input.value !== document.getElementById("new-password").value) {
-        input.setCustomValidity("Password Must be Matching.");
+    const input = document.getElementById("confirm-password");
+    if (input.value.length < 8) {
+        input.setCustomValidity("Password Must be at Least 8 Characters.");
     } else {
-        // input is valid -- reset the error message
-        input.setCustomValidity("");
+        if (input.value !== document.getElementById("new-password").value) {
+            input.setCustomValidity("Password Must be Matching.");
+        } else {
+            // input is valid -- reset the error message
+            input.setCustomValidity("");
+        }
     }
 }
 
-// add event listeners to password inputs to allow for checkMatch
-document.querySelector("#new-password").addEventListener("input", checkMatch);
+// add event listeners to password inputs to allow for checkNewPassword
+document
+    .querySelector("#new-password")
+    .addEventListener("input", checkNewPassword);
 document
     .querySelector("#confirm-password")
-    .addEventListener("input", checkMatch);
+    .addEventListener("input", checkNewPassword);
 
 // add event listeners for change username, email and password forms.
 document
