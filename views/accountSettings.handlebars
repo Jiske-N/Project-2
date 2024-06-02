@@ -6,7 +6,7 @@
 <form class="card-body" id="change-username">
   <div class="mb-3">
     <label for="username" class="form-label">Current: {{thisUser.name}}</label>
-    <input type="text" class="form-control" id="username" placeholder="Enter new username.">
+    <input type="text" required="required" class="form-control" id="username" placeholder="Enter new username.">
   </div>
   <div class="mb-3">
   <button type="submit" class="btn btn-secondary btn-block">Update Username</button>
@@ -27,7 +27,7 @@
 <form class="card-body" id="change-email">
   <div class="mb-3">
     <label for="email" class="form-label">Current: {{thisUser.email}}</label>
-    <input type="email" class="form-control" id="email" placeholder="Enter new email address.">
+    <input type="email" required="required" class="form-control" id="email" placeholder="Enter new email address.">
   </div>
   <div class="mb-3">
   <button type="submit" class="btn btn-secondary btn-block">Update Email</button>
@@ -47,15 +47,15 @@
 <form class="card-body" id="change-password">
   <div class="mb-3">
     <label for="current-password" class="form-label">Enter password</label>
-    <input type="password" class="form-control" id="current-password" placeholder="Enter current password.">
+    <input type="password" required="required" class="form-control" id="current-password" placeholder="Enter current password.">
   </div>
     <div class="mb-3">
     <label for="new-password" class="form-label">Enter new password</label>
-    <input type="password" class="form-control" id="new-password" placeholder="Enter new password: Must be at least 8 characters.">
+    <input type="password" required="required" class="form-control" id="new-password" placeholder="Enter new password: Must be at least 8 characters.">
   </div>
     <div class="mb-3">
     <label for="confirm-password" class="form-label">Confirm new password</label>
-    <input type="password" class="form-control" id="confirm-password" placeholder="Confirm new password.">
+    <input type="password" required="required" class="form-control" id="confirm-password" placeholder="Confirm new password.">
   </div>
   <div class="mb-3">
   <button type="submit" class="btn btn-secondary btn-block">Set New Password</button>

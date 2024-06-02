@@ -67,7 +67,14 @@ router.put("/new-username", checkAuthorisation, async (req, res) => {
             { where: { id: req.session.user_id } }
         );
 
-        res.status(200).json(userData);
+        req.session.save(() => {
+            req.session.username = req.body.newUsername;
+
+            res.status(200).json({
+                user: userData,
+                message: "Username updated successfully",
+            });
+        });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -83,7 +90,10 @@ router.put("/new-email", checkAuthorisation, async (req, res) => {
             { where: { id: req.session.user_id } }
         );
 
-        res.status(200).json(userData);
+        res.status(200).json({
+            user: userData,
+            message: "Email updated successfully",
+        });
     } catch (error) {
         res.status(500).json(error);
     }
