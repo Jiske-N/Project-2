@@ -3,7 +3,7 @@ const handleChangeUsername = async (submission) => {
 
     //   collect new username
     const newUsername = document.querySelector("#username").value.trim();
-
+    console.log("accountjs", newUsername);
     if (newUsername) {
         console.log("accountjs", newUsername);
         const response = await fetch("/api/users/new-username", {
@@ -25,7 +25,7 @@ const handleChangeEmail = async (submission) => {
 
     //   collect new email
     const newEmail = document.querySelector("#email").value.trim();
-
+    console.log("accountjs", newEmail);
     if (newEmail) {
         console.log("accountjs", newEmail);
         const response = await fetch("/api/users/new-email", {
@@ -47,7 +47,7 @@ const handleChangePassword = async (submission) => {
 
     //   collect new password
     const newPassword = document.querySelector("#password").value.trim();
-
+    console.log("accountjs", newPassword);
     if (newPassword) {
         console.log("accountjs", newPassword);
         const response = await fetch("/api/users/new-password", {
