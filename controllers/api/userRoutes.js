@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+const checkAuthorisation = require("../../utils/authorisation");
 
 const signupRoutes = require("../signupRoutes");
 
@@ -56,7 +57,7 @@ router.post("/login", async (req, res) => {
 });
 
 // change username
-router.put("/new-username", async (req, res) => {
+router.put("/new-username", checkAuthorisation, async (req, res) => {
     try {
         console.log(req.body.newUsername);
         const userData = await User.update(
@@ -73,7 +74,7 @@ router.put("/new-username", async (req, res) => {
 });
 
 // change email
-router.put("/new-email", async (req, res) => {
+router.put("/new-email", checkAuthorisation, async (req, res) => {
     try {
         const userData = await User.update(
             {
@@ -103,7 +104,7 @@ router.put("/new-email", async (req, res) => {
 //         res.status(500).json(error);
 //     }
 // });
-router.put("/new-password", async (req, res) => {
+router.put("/new-password", checkAuthorisation, async (req, res) => {
     try {
         const user = await User.findByPk(req.session.user_id);
         if (user) {
@@ -118,7 +119,7 @@ router.put("/new-password", async (req, res) => {
 });
 
 // user logout
-router.post("/logout", (req, res) => {
+router.post("/logout", checkAuthorisation, (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
             res.status(204).end();
