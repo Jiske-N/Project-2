@@ -1,39 +1,30 @@
+{{! potentially change the structure of this page into an ul which contains all of the cards below }}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-  <h5 class="card-header bg-secondary text-white text-center">Change Username</h5>
-<form class="card-body" id="change-username">
-  <div class="mb-3">
-    <label for="username" class="form-label">Current: {{thisUser.name}}</label>
-    <input type="text" required="required" class="form-control" id="username" placeholder="Enter new username.">
-  </div>
-  <div class="mb-3">
-  <button type="submit" class="btn btn-secondary btn-block">Update Username</button>
-  </div>
-</form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</div>
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-  <h5 class="card-header bg-secondary text-white text-center">Change Email</h5>
-<form class="card-body" id="change-email">
-  <div class="mb-3">
-    <label for="email" class="form-label">Current: {{thisUser.email}}</label>
-    <input type="email" required="required" class="form-control" id="email" placeholder="Enter new email address.">
-  </div>
-  <div class="mb-3">
-  <button type="submit" class="btn btn-secondary btn-block">Update Email</button>
-  </div>
-</form>
-                </div>
+                <h5
+                    class="card-header bg-secondary text-white text-center"
+                >Change Username</h5>
+                <form class="card-body" id="change-username">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Current:
+                            {{thisUser.name}}</label>
+                        <input
+                            type="text"
+                            required="required"
+                            class="form-control"
+                            id="username"
+                            placeholder="Enter new username."
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <button
+                            type="submit"
+                            class="btn btn-secondary btn-block"
+                        >Update Username</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -43,25 +34,81 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-  <h5 class="card-header bg-secondary text-white text-center">Change Password</h5>
-<form class="card-body" id="change-password">
-  <div class="mb-3">
-    <label for="current-password" class="form-label">Enter password</label>
-    <input type="password" required="required" class="form-control" id="current-password" placeholder="Enter current password.">
-  </div>
-    <div class="mb-3">
-    <label for="new-password" class="form-label">Enter new password</label>
-    <input type="password" required="required" class="form-control" id="new-password" placeholder="Enter new password: Must be at least 8 characters.">
-  </div>
-    <div class="mb-3">
-    <label for="confirm-password" class="form-label">Confirm new password</label>
-    <input type="password" required="required" class="form-control" id="confirm-password" placeholder="Confirm new password.">
-  </div>
-  <div class="mb-3">
-  <button type="submit" class="btn btn-secondary btn-block">Set New Password</button>
-  </div>
-</form>
-                </div>
+                <h5
+                    class="card-header bg-secondary text-white text-center"
+                >Change Email</h5>
+                <form class="card-body" id="change-email">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Current:
+                            {{thisUser.email}}</label>
+                        <input
+                            type="email"
+                            required="required"
+                            class="form-control"
+                            id="email"
+                            placeholder="Enter new email address."
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <button
+                            type="submit"
+                            class="btn btn-secondary btn-block"
+                        >Update Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <h5
+                    class="card-header bg-secondary text-white text-center"
+                >Change Password</h5>
+                <form class="card-body" id="change-password">
+                    <div class="mb-3">
+                        <label for="current-password" class="form-label">Enter
+                            password</label>
+                        <input
+                            type="password"
+                            required="required"
+                            class="form-control"
+                            id="current-password"
+                            placeholder="Enter current password."
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="new-password" class="form-label">Enter new
+                            password</label>
+                        <input
+                            type="password"
+                            required="required"
+                            class="form-control"
+                            id="new-password"
+                            placeholder="Enter new password: Must be at least 8 characters."
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm-password" class="form-label">Confirm
+                            new password</label>
+                        <input
+                            type="password"
+                            required="required"
+                            class="form-control"
+                            id="confirm-password"
+                            placeholder="Confirm new password."
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <button
+                            type="submit"
+                            class="btn btn-secondary btn-block"
+                        >Set New Password</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

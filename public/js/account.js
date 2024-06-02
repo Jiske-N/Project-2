@@ -1,11 +1,12 @@
+// change username access requires logged_in
 const handleChangeUsername = async (submission) => {
     submission.preventDefault();
 
     //   collect new username
     const newUsername = document.querySelector("#username").value.trim();
-    console.log("accountjs", newUsername);
+
+    // confirm newUsername exists
     if (newUsername) {
-        console.log("accountjs", newUsername);
         const response = await fetch("/api/users/new-username", {
             method: "PUT",
             body: JSON.stringify({ newUsername }),
@@ -20,14 +21,15 @@ const handleChangeUsername = async (submission) => {
     }
 };
 
+// change email access requires logged_in
 const handleChangeEmail = async (submission) => {
     submission.preventDefault();
 
     //   collect new email
     const newEmail = document.querySelector("#email").value.trim();
-    console.log("accountjs", newEmail);
+
+    // confirm newEmail exists
     if (newEmail) {
-        console.log("accountjs", newEmail);
         const response = await fetch("/api/users/new-email", {
             method: "PUT",
             body: JSON.stringify({ newEmail }),
@@ -42,6 +44,7 @@ const handleChangeEmail = async (submission) => {
     }
 };
 
+// change password access requires logged_in
 const handleChangePassword = async (submission) => {
     submission.preventDefault();
 
@@ -54,13 +57,8 @@ const handleChangePassword = async (submission) => {
         .querySelector("#confirm-password")
         .value.trim();
 
-    // // enter error messages for each case of missing data
-    // if (!currentPassword || !newPassword || !confirmPassword) {
-    //     throw console.error("blah");
-    // }
-    console.log("accountjs", currentPassword, newPassword, confirmPassword);
+    // double check for password match - shouldn't be needed due to checkmatch below
     if (newPassword === confirmPassword) {
-        console.log("accountjs", "Match");
         const response = await fetch("/api/users/new-password", {
             method: "PUT",
             body: JSON.stringify({ currentPassword, newPassword }),
@@ -75,6 +73,7 @@ const handleChangePassword = async (submission) => {
     }
 };
 
+// check new and confirm password fields match
 function checkMatch(submission) {
     submission.preventDefault();
 
@@ -87,11 +86,13 @@ function checkMatch(submission) {
     }
 }
 
+// add event listeners to password inputs to allow for checkMatch
 document.querySelector("#new-password").addEventListener("input", checkMatch);
 document
     .querySelector("#confirm-password")
     .addEventListener("input", checkMatch);
 
+// add event listeners for change username, email and password forms.
 document
     .querySelector("#change-username")
     .addEventListener("submit", handleChangeUsername);

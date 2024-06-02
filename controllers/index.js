@@ -6,9 +6,10 @@ const apiRoutes = require("./api");
 const boardRoutes = require("./boardRoutes");
 const accountRoutes = require("./accountRoutes");
 const taskRoutes = require("./taskRoutes");
-// const { User } = require("../models");
 const checkAuthorisation = require("../utils/authorisation");
 
+// below adds the data of the logged in user to all requests. I don't need it but if anyone decides they do feel free to uncomment it. Jiske
+// const { User } = require("../models");
 // router.use(async (req, _res, next) => {
 //     if (req.session.user_id) {
 //         const user = await User.findByPk(req.session.user_id);

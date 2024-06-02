@@ -3,6 +3,7 @@ const sequelize = require("../config/connection");
 const argon2 = require("argon2");
 
 class User extends Model {
+    // confirm loginPw matches
     checkPassword(loginPw) {
         try {
             return argon2.verify(this.password, loginPw);
@@ -11,17 +12,6 @@ class User extends Model {
         }
     }
 }
-
-// // To verify a password:
-// try {
-//   if (await argon2.verify("<big long hash>", "password")) {
-//     // password match
-//   } else {
-//     // password did not match
-//   }
-// } catch (err) {
-//   // internal failure
-// }
 
 User.init(
     {
@@ -46,6 +36,7 @@ User.init(
         password: {
             type: DataTypes.STRING,
             allowNull: false,
+            // potentially add further validations
             validate: {
                 len: [8],
             },
@@ -55,6 +46,7 @@ User.init(
         hooks: {
             beforeCreate: async (newUserData) => {
                 try {
+                    // hash password when user created
                     newUserData.password = await argon2.hash(
                         newUserData.password
                     );
@@ -69,6 +61,7 @@ User.init(
             },
             beforeUpdate: async (updatedUserData) => {
                 try {
+                    // hash password when user updated
                     updatedUserData.password = await argon2.hash(
                         updatedUserData.password
                     );
@@ -89,12 +82,5 @@ User.init(
         modelName: "user",
     }
 );
-
-// // To hash a password:
-// try {
-//   const hash = await argon2.hash("password");
-// } catch (err) {
-//   //...
-// }
 
 module.exports = User;

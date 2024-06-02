@@ -57,14 +57,14 @@ The following authors for providing their codes for public use through npm:
 -   Connect-Session-Sequelize
 -   Dayjs
 -   Dotenv
--   Eslint
+<!-- -   Eslint -->
 -   Express
 -   Express-Handlebars
 -   Express-Session
 -   Handlebars
 -   Nodemon
 -   Pg
--   Prettier
+<!-- -   Prettier -->
 -   Sequelize
 
 ## Questions and Feedback

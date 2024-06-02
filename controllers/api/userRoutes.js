@@ -5,9 +5,18 @@ const checkAuthorisation = require("../../utils/authorisation");
 // create new user
 router.post("/signup", async (req, res) => {
     try {
-        console.log("this is reckedup body ", req.body);
         const userData = await User.create(req.body);
 
+        // confirm user was created
+        if (!userData) {
+            res.status(404).json({
+                message: "Error creating user",
+            });
+            // return is not necessary but is used as an indicator that the function exits
+            return;
+        }
+
+        // autologin/saved created users data to session
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
@@ -24,30 +33,35 @@ router.post("/signup", async (req, res) => {
 // existing user login
 router.post("/login", async (req, res) => {
     try {
-        console.log("userRoutes login started");
+        // find user whos login matches email from input
         const userData = await User.findOne({
             where: { email: req.body.email },
         });
-        console.log("userRoutes login", userData);
 
+        // confirm user exists
         if (!userData) {
-            res.status(400).json({
+            res.status(404).json({
                 message: "Incorrect email or password, please try again",
             });
+            // return is not necessary but is used as an indicator that the function exits
             return;
         }
 
+        // check if password entered matches saved password
         const validatePassword = await userData.checkPassword(
             req.body.password
         );
 
+        // cancel login if password doesn't match
         if (!validatePassword) {
-            res.status(400).json({
+            res.status(404).json({
                 message: "Incorrect email or password, please try again",
             });
+            // return is not necessary but is used as an indicator that the function exits
             return;
         }
 
+        // user is logged in and their details are saved to the session
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
@@ -64,7 +78,7 @@ router.post("/login", async (req, res) => {
 // change username
 router.put("/new-username", checkAuthorisation, async (req, res) => {
     try {
-        console.log(req.body.newUsername);
+        // select user to update
         const userData = await User.update(
             {
                 name: req.body.newUsername,
@@ -72,6 +86,16 @@ router.put("/new-username", checkAuthorisation, async (req, res) => {
             { where: { id: req.session.user_id } }
         );
 
+        // confirm user exists
+        if (!userData) {
+            res.status(404).json({
+                message: "User not found",
+            });
+            // return is not necessary but is used as an indicator that the function exits
+            return;
+        }
+
+        // save updated username to the session so navbars update
         req.session.save(() => {
             req.session.username = req.body.newUsername;
 
@@ -88,12 +112,22 @@ router.put("/new-username", checkAuthorisation, async (req, res) => {
 // change email
 router.put("/new-email", checkAuthorisation, async (req, res) => {
     try {
+        // select user to update
         const userData = await User.update(
             {
                 email: req.body.newEmail,
             },
             { where: { id: req.session.user_id } }
         );
+
+        // confirm user exists
+        if (!userData) {
+            res.status(404).json({
+                message: "User not found",
+            });
+            // return is not necessary but is used as an indicator that the function exits
+            return;
+        }
 
         res.status(200).json({
             user: userData,
@@ -107,18 +141,25 @@ router.put("/new-email", checkAuthorisation, async (req, res) => {
 // change password
 router.put("/new-password", checkAuthorisation, async (req, res) => {
     try {
+        // select user to update
         const userData = await User.findByPk(req.session.user_id);
 
+        // confirm user exists
         if (userData) {
+            // check old password matches saved value
             const validatePassword = await userData.checkPassword(
                 req.body.currentPassword
             );
+
             if (!validatePassword) {
+                // end function if passwords don't match
                 res.status(400).json({
                     message: "Incorrect password, please try again",
                 });
+                // return is not necessary but is used as an indicator that the function exits
                 return;
             } else {
+                // update the password
                 await userData.update({ password: req.body.newPassword });
                 res.status(200).json({
                     message: "Password updated successfully",
@@ -126,6 +167,8 @@ router.put("/new-password", checkAuthorisation, async (req, res) => {
             }
         } else {
             res.status(404).json({ message: "User not found" });
+            // return is not necessary but is used as an indicator that the function exits
+            return;
         }
     } catch (error) {
         res.status(500).json(error);
