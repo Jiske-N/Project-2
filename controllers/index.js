@@ -10,15 +10,9 @@ const taskRoutes = require("./taskRoutes");
 const checkAuthorisation = require("../utils/authorisation");
 
 // router.use(async (req, _res, next) => {
-//     // if (req.session.username) {
-//     //     const username = await User.findByPk(req.session.user_id);
-//     //     req.user = user;
-//     // }
 //     if (req.session.user_id) {
 //         const user = await User.findByPk(req.session.user_id);
 //         req.user = user;
-//         const username = req.session.username;
-//         req.username = username;
 //     }
 //     next();
 // });
