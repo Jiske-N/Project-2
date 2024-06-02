@@ -73,6 +73,49 @@ const handleChangePassword = async (submission) => {
     }
 };
 
+// trying to get alerts to show message from errors in userRoutes.
+// // change password access requires logged_in
+// const handleChangePassword = async (submission) => {
+//     try {
+//         submission.preventDefault();
+
+//         //   collect current, new and confirmed passwords
+//         const currentPassword = document
+//             .querySelector("#current-password")
+//             .value.trim();
+//         const newPassword = document
+//             .querySelector("#new-password")
+//             .value.trim();
+//         const confirmPassword = document
+//             .querySelector("#confirm-password")
+//             .value.trim();
+
+//         // double check for password match - shouldn't be needed due to checkmatch below
+//         if (newPassword === confirmPassword) {
+//             const response = await fetch("/api/users/new-password", {
+//                 method: "PUT",
+//                 body: JSON.stringify({ currentPassword, newPassword }),
+//                 headers: { "Content-Type": "application/json" },
+//             });
+
+//             if (response.ok) {
+//                 document.location.reload();
+//             } else {
+//                 // throw error to provide response message
+//                 const error = new Error(response.statusText);
+//                 error.response = response;
+//                 return response.json().then((data) => {
+//                     throw error;
+//                 });
+//             }
+//         }
+//     } catch (error) {
+//         // alert response message
+//         alert(response.statusText);
+//         alert(error.response.message);
+//     }
+// };
+
 // check new and confirm password fields match
 function checkMatch(submission) {
     submission.preventDefault();
