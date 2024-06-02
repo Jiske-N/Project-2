@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+const checkAuthorisation = require("../../utils/authorisation");
 
 const signupRoutes = require("../signupRoutes");
 
@@ -7,6 +8,7 @@ const signupRoutes = require("../signupRoutes");
 router.post("/signup", async (req, res) => {
     try {
         console.log("this is req.body ",req.body);
+
         const userData = await User.create(req.body);
         res.json(userData);
     } catch (err) {
@@ -14,7 +16,6 @@ router.post("/signup", async (req, res) => {
         res.status(400).json(err);
     }
 });
-
 
 // existing user login
 router.post("/login", async (req, res) => {
@@ -46,6 +47,7 @@ router.post("/login", async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
+            req.session.username = userData.name;
 
             res.json({ user: userData, message: "You are now logged in!" });
         });
@@ -56,8 +58,9 @@ router.post("/login", async (req, res) => {
 });
 
 // change username
-router.put("/new-username", async (req, res) => {
+router.put("/new-username", checkAuthorisation, async (req, res) => {
     try {
+        console.log(req.body.newUsername);
         const userData = await User.update(
             {
                 name: req.body.newUsername,
@@ -72,7 +75,7 @@ router.put("/new-username", async (req, res) => {
 });
 
 // change email
-router.put("/new-email", async (req, res) => {
+router.put("/new-email", checkAuthorisation, async (req, res) => {
     try {
         const userData = await User.update(
             {
@@ -88,23 +91,36 @@ router.put("/new-email", async (req, res) => {
 });
 
 // change password
-router.put("/new-password", async (req, res) => {
-    try {
-        const userData = await User.update(
-            {
-                name: req.body.newPassword,
-            },
-            { where: { id: req.session.user_id } }
-        );
+// router.put("/new-password", async (req, res) => {
+//     try {
+//         const userData = await User.update(
+//             {
+//                 password: req.body.newPassword,
+//             },
+//             { where: { id: req.session.user_id } }
+//         );
 
-        res.status(200).json(userData);
+//         res.status(200).json(userData);
+//     } catch (error) {
+//         res.status(500).json(error);
+//     }
+// });
+router.put("/new-password", checkAuthorisation, async (req, res) => {
+    try {
+        const user = await User.findByPk(req.session.user_id);
+        if (user) {
+            await user.update({ password: req.body.newPassword });
+            res.status(200).json({ message: "Password updated successfully" });
+        } else {
+            res.status(404).json({ message: "User not found" });
+        }
     } catch (error) {
         res.status(500).json(error);
     }
 });
 
 // user logout
-router.post("/logout", (req, res) => {
+router.post("/logout", checkAuthorisation, (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
             res.status(204).end();
