@@ -7,7 +7,6 @@ const handleLoginForm = async (submission) => {
     const password = document.querySelector("#password").value.trim();
 
     if (email && password) {
-        console.log("loginjs", email, password);
         const response = await fetch("/api/users/login", {
             method: "POST",
             body: JSON.stringify({ email, password }),
@@ -15,7 +14,8 @@ const handleLoginForm = async (submission) => {
         });
 
         if (response.ok) {
-            document.location.replace("/");
+            // redirect to taskboard
+            document.location.replace("/board");
         } else {
             alert(response.statusText);
         }
