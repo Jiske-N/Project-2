@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { User } = require("../models");
-
+const { User_s } = require("../models");
 
 // Render the signup form
 router.get("/", async (req, res) => {

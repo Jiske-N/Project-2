@@ -28,18 +28,18 @@ Task.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "user",
+                model: "user_s",
                 key: "id",
             },
         },
 
         list_id: {
             type: DataTypes.INTEGER,
-            allowNull:false,
+            allowNull: false,
             references: {
-                model: 'list',
-                key: 'id'
-            }
+                model: "list",
+                key: "id",
+            },
         },
         due_date: {
             type: DataTypes.DATE,

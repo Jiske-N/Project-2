@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 const argon2 = require("argon2");
 
-class User extends Model {
+class User_s extends Model {
     // confirm loginPw matches
     checkPassword(loginPw) {
         try {
@@ -13,7 +13,7 @@ class User extends Model {
     }
 }
 
-User.init(
+User_s.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -79,8 +79,8 @@ User.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: "user",
+        modelName: "user_s",
     }
 );
 
-module.exports = User;
+module.exports = User_s;

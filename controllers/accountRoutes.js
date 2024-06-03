@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { User } = require("../models");
+const { User_s } = require("../models");
 
 // display account settings with options to change thisUser's details
 router.get("/", async (req, res) => {
@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     try {
         const userId = req.session.user_id;
 
-        const userData = await User.findByPk(userId);
+        const userData = await User_s.findByPk(userId);
 
         const thisUser = userData.get({ plain: true });
 
