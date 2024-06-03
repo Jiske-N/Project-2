@@ -70,6 +70,39 @@ The following authors for providing their codes for public use through npm:
 ## Questions and Feedback
 
 If you find any issues or have contributions or feedback you can do so by opening an [issue](https://github.com/Jiske-N/Task-Manager/issues) on Github.
+Elevator pitch: A one-minute description of your application.
+Concept: What is your user story? What was your motivation for development?
+Process: What were the technologies used? How were tasks and roles broken down and assigned? What challenges did you encounter? What were your successes?
+Demo: Show your stuff!
+Directions for future development.
+
+Brief team /taskmaster intro Brian 0.5/0.5
+Elevator pitch Gayle 1/1.5
+Demo everyone:
+Home Page & navbar Rasika 1/2.5
+Login/Logout and account settings Jiske 1/3.5
+Board Page Brian 1/4.5
+Task Management Gayle 1/5.5
+Concept Rasika 1.5/7
+Description
+Motivation for development
+User story
+Process Jiske 1.5/8.5
+Technologies used
+Breakdown of tasks and roles
+Challenges
+Successes
+Directions for Future Development Brian 1/9.5
+Links and Questions Gayle/Everyone 0.5/10
+
+Elevator Pitch - Gayle
+Concept - Rasika
+Process - Jiske
+Demo - All
+Future development - Brian
+Q&A - All
+
+
 
 ## Contributing
 
