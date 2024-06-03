@@ -96,7 +96,6 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-// List routes
 // Get all lists
 router.get("/lists", async (req, res) => {
     try {
@@ -107,45 +106,6 @@ router.get("/lists", async (req, res) => {
     }
 });
 
-// Create a new list
-router.post("/lists", async (req, res) => {
-    try {
-        const { name, boardId } = req.body;
-        const newList = await List.create({ name, boardId });
-        res.status(200).json(newList);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 
-// Update a list by ID
-router.put("/lists/:id", async (req, res) => {
-    try {
-        const { name } = req.body;
-        const list = await List.findByPk(req.params.id);
-        if (!list) {
-            return res.status(404).json({ error: "List not found" });
-        }
-        list.name = name;
-        await list.save();
-        res.json(list);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Delete a list by ID
-router.delete("/lists/:id", async (req, res) => {
-    try {
-        const list = await List.findByPk(req.params.id);
-        if (!list) {
-            return res.status(404).json({ error: "List not found" });
-        }
-        await list.destroy();
-        res.json({ message: "List deleted" });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 
 module.exports = router;

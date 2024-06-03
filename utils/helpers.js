@@ -68,4 +68,16 @@ module.exports = {
       }
     }
   },
+
+  list_title_input: (value, listId) => {
+    const val = Handlebars.escapeExpression(value);
+    const listTitle = `list-title-${listId}`;
+    return new Handlebars.SafeString(
+      "<input class='form-input list-title' id=" +
+      listTitle +
+        " type='text' value='" +
+        val +
+        "'/>"
+    );
+  },
 };
