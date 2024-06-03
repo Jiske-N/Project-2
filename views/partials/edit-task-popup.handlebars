@@ -20,7 +20,7 @@
       <div class="modal-header">
         <i class="fa-solid fa-pencil"></i>
         <div class="flex-col text-left">
-          {{{title_input title}}}
+          {{{title_input title id}}}
           <p class="list-text">in list <b>{{status}}</b></p>
         </div>
         <button
@@ -40,15 +40,15 @@
           <i class="fa-solid fa-align-left"></i>
           <div class="form-group">
             <label for="task-description">Description</label>
-            {{{content_input description}}}
+            {{{content_input description id}}}
           </div>
         </div>
         <div class="flex-row text-left">
           <i class="fa-solid fa-calendar-days"></i>
           <div class="form-group">
             <label for="task-duedate">Due date</label>
-            {{{date_input due_date}}}
-            <button id="edit-task-save" class="edit-task-save">Save</button>
+            {{{date_input due_date id}}}
+            <button id="edit-task-save-{{id}}" class="edit-task-save">Save</button>
           </div>
         </div>
 
@@ -60,8 +60,8 @@
           <i class="fa-solid fa-comment"></i>
           <div class="form-group">
             <label for="task-description">Comments</label>
-            <textarea class="new-comment" id="new-comment" placeholder="Write a comment..."></textarea>
-            <button id="save-comment">Post</button>
+            <textarea class="new-comment" id="new-comment-{{id}}" placeholder="Write a comment..."></textarea>
+            <button id="save-comment-{{id}}" class="save-comment" value={{id}}>Post</button>
           </div>
         </div>
         {{#each comments as |Comment|}}
@@ -71,12 +71,80 @@
 
       {{! Delete section }}
       <div class="delete-body">
-        <button class="delete-task"><i class="fa-solid fa-trash"></i>Delete Task</button>
+        <button class="delete-task" id="delete-task-{{id}}"><i class="fa-solid fa-trash"></i>Delete Task</button>
       </div>
     </div>
   </div>
 </div>
 
 
+{{!-- Call scripts --}}
+{{!-- Post a new comment --}}
+<script>
+  const button{{id}} = document.getElementById('save-comment-{{id}}')
+  button{{id}}.addEventListener("click", async () => {
+    const comment = document.getElementById('new-comment-{{id}}').value;
+    const taskId = {{id}}
+    const response = await fetch("/api/comment", {
+      method: 'POST',
+      body: JSON.stringify({comment, taskId }),
+      headers: { 'Content-Type': 'application/json' }
+    })
 
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace('/board');
+    } else {
+      alert(`${response.statusText}: Invalid task`);
+    }
+  
+  })
+</script>
+
+{{!-- Update a Task--}}
+<script>
+  const saveButton{{id}} = document.getElementById('edit-task-save-{{id}}')
+  saveButton{{id}}.addEventListener("click", async () => {
+
+    const taskId = {{id}}
+    const title = document.querySelector('#task-title-{{id}}').value.trim();
+    const description = document.querySelector('#task-description-{{id}}').value.trim();
+    const dueDate = document.querySelector('#task-duedate-{{id}}').value;
+
+    const response = await fetch("/api/tasks/{{id}}", {
+      method: 'PUT',
+      body: JSON.stringify({title, description, dueDate, taskId }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace('/board');
+    } else {
+      alert(`${response.statusText}: Invalid task`);
+    }
+
+  })
+</script>
+
+
+{{!-- Delete a task  --}}
+
+<script>
+  const deleteButton{{id}} = document.getElementById('delete-task-{{id}}')
+  deleteButton{{id}}.addEventListener("click", async () => {
+
+    const response = await fetch('/api/tasks/{{id}}', {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace('/board');
+    } else {
+      alert(`${response.statusText}: Invalid task`);
+    }
+  
+  })
+</script>
 

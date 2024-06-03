@@ -1,20 +1,15 @@
 
 const router = require('express').Router();
-const { Task, List, Comment } = require('../../models');
+const { Comment } = require('../../models');
 
-//POST route to create a new task
+//POST route to create a new comment on a post
 router.post('/', async (req, res) => {
     try {
-        const listData = await List.findByPk(req.body.listId);
-        const list = listData.get({ plain: true });
 
         await Comment.create({
-            title: req.body.title,
-            description: req.body.description,
-            user_id: req.body.user,
-            due_date: req.body.dueDate,
-            list_id: req.body.listId,
-            status: list.name
+            comment: req.body.comment,
+            task_id: req.body.taskId,
+            user_id: req.session.user_id
         }).then((newTask) => {
             res.json(newTask)
         })
@@ -23,35 +18,6 @@ router.post('/', async (req, res) => {
     }
 })
 
-//PUT route to edit a task
-router.post('/:id', async (req, res) => {
-    try {
-        await Task.update({
-            title: req.body.title,
-            description: req.body.description,
-            user_id: req.body.user,
-            due_date: req.body.dueDate,
-            list_id: req.body.listId
-        })
-    } catch (err) {
-        console.error(err)
-    }
-});
-
-//DELETE route to edit a task
-router.delete('/id', async (req, res) => {
-    try {
-        await Task.destroy({
-            where: {
-                id: req.params.id
-            },
-        })      .then((deletedPost) => {
-            res.json(deletedPost);
-          })
-    } catch (err) {
-        console.error(err)
-    }
-})
 
 
 

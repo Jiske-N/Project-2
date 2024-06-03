@@ -9,32 +9,35 @@ module.exports = {
     return date.toLocaleDateString();
   },
   //Adds in the existing value to the edit post page
-  title_input: (value) => {
+  title_input: (value, taskId) => {
     const val = Handlebars.escapeExpression(value);
+    const taskTitle = `task-title-${taskId}`
     return new Handlebars.SafeString(
-      "<input class='form-input task-title' id='task-title' type='text' value='" +
+      "<input class='form-input task-title' id="+ taskTitle + " type='text' value='" +
         val +
         "'/>"
     );
   },
   //Adds in the existing value to the edit post page
-  content_input: (value) => {
+  content_input: (value, taskId) => {
     const val = Handlebars.escapeExpression(value);
+    const taskDescription = `task-description-${taskId}`
     return new Handlebars.SafeString(
-      "<textarea class='form-input' id='task-description' >" +
+      "<textarea class='form-input' id="+ taskDescription + ">" +
         val +
         "</textarea>"
     );
   },
   //Formats the date and adds it to the due date input
-  date_input: (value) => {
+  date_input: (value, taskId) => {
     if (value !== undefined) {
       const date = dayjs(value).format("YYYY-MM-DD");
+      const taskDate = `task-duedate-${taskId}`
 
       const val = Handlebars.escapeExpression(date);
 
       return new Handlebars.SafeString(
-        "<input class='form-input' id='task-duedate' type='date' value='" +
+        "<input class='form-input' id="+ taskDate + " type='date' value='" +
           val +
           "'/>"
       );
@@ -51,6 +54,10 @@ module.exports = {
     if (nameLetters.length === 2) {
       const nameIcon = `${nameLetters[0]}${nameLetters[1]}`
       return nameIcon
+    }
+    if (nameLetters.length === 1) {
+      const nameIcon = `${nameLetters[0]}`
+      return nameIcon;
     }
   }
 
