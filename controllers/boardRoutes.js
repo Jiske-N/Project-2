@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Board, List, Task, Comment, User } = require("../models");
+const { Board, List, Task, Comment, User_s } = require("../models");
 
 // Get all boards with their associated  tasks
 router.get("/", async (req, res) => {
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
                 include: {
                     model: Comment,
                     include: {
-                        model: User,
+                        model: User_s,
                     },
                 },
             },

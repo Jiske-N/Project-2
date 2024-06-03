@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User_s } = require("../../models");
 const checkAuthorisation = require("../../utils/authorisation");
 
 // create new user
 router.post("/signup", async (req, res) => {
     try {
-        const userData = await User.create(req.body);
+        const userData = await User_s.create(req.body);
 
         // confirm user was created
         if (!userData) {
@@ -34,7 +34,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         // find user whos login matches email from input
-        const userData = await User.findOne({
+        const userData = await User_s.findOne({
             where: { email: req.body.email },
         });
 
@@ -79,7 +79,7 @@ router.post("/login", async (req, res) => {
 router.put("/new-username", checkAuthorisation, async (req, res) => {
     try {
         // select user to update
-        const userData = await User.update(
+        const userData = await User_s.update(
             {
                 name: req.body.newUsername,
             },
@@ -113,7 +113,7 @@ router.put("/new-username", checkAuthorisation, async (req, res) => {
 router.put("/new-email", checkAuthorisation, async (req, res) => {
     try {
         // select user to update
-        const userData = await User.update(
+        const userData = await User_s.update(
             {
                 email: req.body.newEmail,
             },
@@ -142,7 +142,7 @@ router.put("/new-email", checkAuthorisation, async (req, res) => {
 router.put("/new-password", checkAuthorisation, async (req, res) => {
     try {
         // select user to update
-        const userData = await User.findByPk(req.session.user_id);
+        const userData = await User_s.findByPk(req.session.user_id);
 
         // confirm user exists
         if (userData) {

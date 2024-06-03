@@ -1,19 +1,25 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Board extends Model {}
+// Create Comment model and datatypes.
+class Comment extends Model {}
 
-Board.init(
+Comment.init(
     {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            autoIncrement: true,
             primaryKey: true,
+            autoIncrement: true,
         },
-        name: {
-            type: DataTypes.STRING,
+        comment: {
+            type: DataTypes.TEXT,
             allowNull: false,
+        },
+        date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -23,14 +29,22 @@ Board.init(
                 key: "id",
             },
         },
+        task_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "task",
+                key: "id",
+            },
+        },
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: "board",
+        modelName: "comment",
     }
 );
 
-module.exports = Board;
+module.exports = Comment;

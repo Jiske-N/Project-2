@@ -38,7 +38,7 @@ module.exports = {
       const date = dayjs(value).format("YYYY-MM-DD");
       const taskDate = `task-duedate-${taskId}`;
 
-      const val = Handlebars.escapeExpression(date);
+            const val = Handlebars.escapeExpression(date);
 
       return new Handlebars.SafeString(
         "<input class='form-input' id=" +
