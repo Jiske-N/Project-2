@@ -49,23 +49,6 @@ module.exports = {
             );
         }
     },
-    // create_icon: (name) => {
-    //   const names = name.split(" ");
-    //   const nameLetters = []
-    //   for (let i = 0; i < names.length; i++) {
-    //     let firstLetter = names[i][0];
-    //     nameLetters.push(firstLetter)
-    //   }
-
-    //   if (nameLetters.length === 2) {
-    //     const nameIcon = `${nameLetters[0]}${nameLetters[1]}`
-    //     return nameIcon
-    //   }
-    //   if (nameLetters.length === 1) {
-    //     const nameIcon = `${nameLetters[0]}`
-    //     return nameIcon;
-    //   }
-    // }
     create_icon: (name) => {
         if (name !== undefined) {
             const names = name.split(" ");
