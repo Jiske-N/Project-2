@@ -84,7 +84,13 @@ button:hover {
     opacity: 0.8;
 }
 
-
+/*-------------NAV BAR-------------*/
+.navbar {
+    padding: 0;
+.container {
+    margin: 0;
+}
+}
 
 
 /*-------------TASK POPUP-------------*/
@@ -214,9 +220,9 @@ color: black;
     border-radius: 0 0 8px 8px;
 }
 
-.save-comment {
+/* .save-comment {
     display: none;
-}
+} */
 
 .comment-body {
     padding: 0 0.5rem;
