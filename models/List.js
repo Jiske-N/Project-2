@@ -27,7 +27,7 @@ List.init(
         //     type: DataTypes.INTEGER,
         //     allowNull: false,
         //     references: {
-        //         model: "user_s",
+        //         model: "user",
         //         key: "id",
         //     },
         // },
