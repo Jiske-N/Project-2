@@ -276,9 +276,9 @@ p {
   border-radius: 0 0 8px 8px;
 }
 
-.save-comment {
-  display: none;
-}
+/* .save-comment {
+    display: none;
+} */
 
 .comment-body {
   padding: 0 0.5rem;

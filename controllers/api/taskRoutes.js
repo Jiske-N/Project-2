@@ -25,14 +25,16 @@ router.post('/', async (req, res) => {
 })
 
 //PUT route to edit a task
-router.post('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         await Task.update({
             title: req.body.title,
             description: req.body.description,
-            user_id: req.body.user,
             due_date: req.body.dueDate,
-            list_id: req.body.listId
+        }, {
+            where: {
+                id: req.params.id
+            }
         })
     } catch (err) {
         console.error(err)
@@ -40,9 +42,10 @@ router.post('/:id', async (req, res) => {
 });
 
 //DELETE route to edit a task
-router.delete('/id', async (req, res) => {
+router.delete('/:id',  (req, res) => {
+
     try {
-        await Task.destroy({
+         Task.destroy({
             where: {
                 id: req.params.id
             },

@@ -45,8 +45,12 @@
         {{/each}}
       </section>
 
-{{!-- Update name for list --}}
-<script>
+
+
+    </main>
+
+   {{!-- Update name for list --}}
+ <script>
   document.querySelector('.add-list-form').addEventListener('submit', async (event) => {
       event.preventDefault();
       const name = event.target.name.value;
@@ -74,8 +78,6 @@
         window.location.reload();
       });
     });
-  </script>
-
-    </main>
+   </script>
     <script src="./js/createTask.js"></script>
-    <script src="./js/newComment.js"></script> 
+    {{!-- <script src="./js/newComment.js"></script>  --}}
