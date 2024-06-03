@@ -61,7 +61,7 @@
           <div class="form-group">
             <label for="task-description">Comments</label>
             <textarea class="new-comment" id="new-comment-{{id}}" placeholder="Write a comment..."></textarea>
-            <button id="save-comment-{{id}}" class="save-comment" value={{id}}>Post</button>
+            <button id="save-comment-{{id}}" class="save-comment" value={{id}} style="display:none">Post</button>
           </div>
         </div>
         {{#each comments as |Comment|}}
@@ -146,5 +146,14 @@
     }
   
   })
+</script>
+
+
+{{!-- Show comment save button --}}
+<script>
+const input{{id}} = document.getElementById('new-comment-{{id}}').addEventListener("click", () => {
+  document.getElementById('save-comment-{{id}}').style.display = "flex"
+})
+
 </script>
 
