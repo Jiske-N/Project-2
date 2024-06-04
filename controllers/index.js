@@ -6,6 +6,7 @@ const apiRoutes = require("./api");
 const boardRoutes = require("./boardRoutes");
 const accountRoutes = require("./accountRoutes");
 const taskRoutes = require("./taskRoutes");
+const taskSearchRoutes = require("./taskSearchRoutes");
 const checkAuthorisation = require("../utils/authorisation");
 
 // below adds the data of the logged in user to all requests. I don't need it but if anyone decides they do feel free to uncomment it. Jiske
@@ -26,4 +27,5 @@ router.use("/board", checkAuthorisation, boardRoutes);
 // router.use("/signup", userController);
 router.use("/account", checkAuthorisation, accountRoutes);
 router.use("/task", checkAuthorisation, taskRoutes);
+router.use("/search-tasks", checkAuthorisation, taskSearchRoutes);
 module.exports = router;
