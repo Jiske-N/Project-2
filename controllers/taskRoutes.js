@@ -1,67 +1,109 @@
 const express = require("express");
 const router = express.Router();
-const { Board, List, Task } = require("../models");
+const { Board, List, Task, Comment, User_s } = require("../models");
+const { where } = require("sequelize");
+const { Op } = require("sequelize");
 
-//GET task by id
+// GET task by id
 router.get("/:id", async (req, res) => {
-  try {
-    const taskData = await Task.findByPk(req.params.id);
-    const task = taskData.get({ plain: true });
+    try {
+        const taskData = await Task.findByPk(req.params.id);
+        const task = taskData.get({ plain: true });
 
-    //Get all the tasks for the board
-    res.render("edit-task-popup", {
-      task,
-      username: req.session.username,
-      logged_in: req.session.logged_in,
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+        //Get all the tasks for the board
+        res.render("edit-task-popup", {
+            task,
+            username: req.session.username,
+            logged_in: req.session.logged_in,
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-router.get("/", async (req, res) => {
-  try {
-    const { status, user_id, due_date } = req.query;
+// filter tasks based on search
+// router.get("/search", async (req, res) => {
+//     try {
+//         console.log("taskRoutes.js", "starting");
+//         const { name, status, date } = req.query;
 
-    // Create a filter object
-    let filter = {};
+//         console.log("taskRoutes.js", "req.query", req.query);
 
-    if (status) {
-      filter.status = status;
-    }
+//         let filter = {};
 
-    if (user_id) {
-      filter.user_id = user_id;
-    }
+//         if (status && status !== "") {
+//             filter.statuss = status;
+//         }
 
-    if (due_date) {
-      filter.dueDate = due_date;
-    }
+//         if (name && name !== "") {
+//             const user = await User_s.findOne({
+//                 where: {
+//                     name,
+//                 },
+//             });
+//             if (user) {
+//                 filter.user_id = user.id;
+//             }
+//         }
 
-    const tasks = await Task.findAll({
-      where: filter,
-    });
+//         if (date && date !== "") {
+//             filter.due_date = date;
+//         }
 
-    res.json(tasks);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//         console.log("taskRoutes.js", "filter", filter);
+
+//         const boardsData = await Board.findAll();
+//         const boards = boardsData.map((board) => board.get({ plain: true }));
+
+//         const listsData = await List.findAll({
+//             where: {
+//                 board_id: boards[0].id,
+//             },
+//             include: {
+//                 model: Task,
+//                 where: {
+//                     [Op.and]: [
+//                         filter.statuss && { status: filter.statuss },
+//                         filter.user_id && { user_id: filter.user_id },
+//                         filter.due_date && { due_date: filter.due_date },
+//                     ].filter(Boolean), // Remove falsy values
+//                 },
+//                 include: {
+//                     model: Comment,
+//                     include: {
+//                         model: User_s,
+//                     },
+//                 },
+//             },
+//         });
+
+//         const lists = listsData.map((list) => list.get({ plain: true }));
+//         console.log("taskRoutes.js", "lists", lists);
+
+//         res.render("task", {
+//             lists,
+//             username: req.session.username,
+//             logged_in: req.session.logged_in,
+//         });
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
 
 // Update a task's list
 router.put("/:id/move", async (req, res) => {
-  try {
-    const { list_id } = req.body;
-    const task = await Task.findByPk(req.params.id);
-    if (!task) {
-      return res.status(404).json({ error: "Task not found" });
+    try {
+        const { list_id } = req.body;
+        const task = await Task.findByPk(req.params.id);
+        if (!task) {
+            return res.status(404).json({ error: "Task not found" });
+        }
+        task.list_id = list_id;
+        await task.save();
+        res.json(task);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    task.list_id = list_id;
-    await task.save();
-    res.json(task);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
 });
 
 module.exports = router;

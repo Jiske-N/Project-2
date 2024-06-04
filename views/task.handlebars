@@ -1,57 +1,23 @@
-{{! Basic page for task manager }}
+{{! Basic page for task search. mostly copied from board.handlebars. }}
 {{! APPLY STYLING VIA BOOTSTRAP + CSS }}
 
 <main class="container">
   <header class="header">
-    <div class="row g-3 align-items-center">
-      <div class="col-auto">
-        <h1 class="title">Task Board</h1>
-      </div>
-      <form class="row g-3 align-items-center" id="filterTasks">
-        <div class="col-auto">
-          <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user.">
-        </div>
-        <div class="col-auto">
-          <input type="text" class="form-control" id="taskByStatus" placeholder="Search tasks by status.">
-        </div>
-        <div class="col-auto">
-          {{!-- <label for="taskByDate">Search tasks by due date.</label> --}}
-          <input type="date" class="form-control" id="taskByDate">
-        </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary">Filter tasks by fields.</button>
-        </div>
-    </div>
-    </form>
+    <h1 class="title">Task Search</h1>
+    {{!-- <form id="filterTasks">
+      <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user.">
+            <input type="text" class="form-control" id="taskByStatus" placeholder="Search tasks by status.">
+                  <input type="text" class="form-control" id="taskByDate" placeholder="Search tasks by due date.">
+      <button type="submit" class="btn btn-primary">Filter tasks by fields.</button>
+    </form> --}}
   </header>
-  
   <div class="flex-row">
     <section class="boards">
-      {{!-- {{#each boards}}
-          <div class="board">
-            <header class="board-header">
-              <h3 class="board-title">{{this.name}}</h3>
-            </header>
-            <section class="tasks">
-              {{#each this.tasks}}
-                <div class="task">
-                  <header class="task-header">
-                    <h5 class="task-title">{{this.title}}</h5>
-                  </header>
-                  <p class="task-text">{{this.description}}</p>
-                  <footer class="task-footer">
-                    <small class="task-status">{{this.status}}</small>
-                  </footer>
-                </div>
-              {{/each}}
-            </section>
-          </div>
-        {{/each}} --}}
 
     </section>
-    <section class="list-container flex-row" id="div-{{id}}" ondrop="drop(event)" ondragover="allowDrop(event)" >
+    <section class="list-container flex-row">
       {{#each lists as |List|}}
-        <div class="list flex-col" draggable="true" ondragstart="drag(event)" id="drag-list-{{id}}">
+        <div class="list flex-col">
           <div class="flex-row list-title">
             {{{list_title_input name id}}}
             <button class="update-list-title" id="update-list-{{id}}" style="display:none">Update</button>
@@ -89,6 +55,7 @@
 
                     if (response.ok) {
                       // If successful, redirect the browser to the profile page
+                      console.log("title")
                       document.location.reload();
                     } else {
                       alert(`${response.statusText}: Invalid task`);
@@ -105,12 +72,9 @@
             {{> task-popup}}
           </div>
         </div>
-        {{!-- <div id="div-{{id}}" ondrop="drop(event)" ondragover="allowDrop(event)"></div> --}}
       {{/each}}
     </section>
 
-
-    {{!-- List section --}}
     <section class="list-button-container">
       <button class="list-button" id="open-list" style="display:flex">
         <i class="fa-solid fa-plus"></i>
@@ -133,22 +97,6 @@
 
 {{! Update name for list }}
 
-<script>
-  const drop = (event) => {
-      event.preventDefault();
-  const data = event.dataTransfer.getData("text");
-  event.target.appendChild(document.getElementById(data));
-
-  }
-
-  const drag = (event) => {
-    event.dataTransfer.setData("text", event.target.id)
-    console.log(event)
-  }
-
-  const allowDrop = (event) => {
-    event.preventDefault();
-  }
-
-</script>
+<script src="./js/createTask.js"></script>
+{{!-- <script src="./js/searchTask.js"></script> --}}
 <script src="./js/addList.js"></script>
