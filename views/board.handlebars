@@ -29,9 +29,10 @@
           </div>
         {{/each}} --}}
 
-    </section>
-    <section class="list-container flex-row">
-      {{#each lists as |List|}}
+
+      </section>
+      <section class="list-container flex-row">
+        {{#each lists as |List|}}
         <div class="list flex-col">
           <div class="flex-row list-title">
             {{{list_title_input name id}}}
@@ -108,9 +109,40 @@
       </div>
     </section>
   </div>
-</main>
 
-{{! Update name for list }}
 
-<script src="./js/createTask.js"></script>
-<script src="./js/addList.js"></script>
+    </main>
+
+ <script>
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    async function drop(event) {
+      event.preventDefault();
+      const data = event.dataTransfer.getData("text");
+      const taskElement = document.getElementById(data);
+      const newListElement = event.target.closest(".list");
+
+      // Check drop target is a list
+      if (newListElement && newListElement.classList.contains("list")) {
+        const newListId = newListElement.querySelector(".add-task-form").dataset.listId;
+
+        newListElement.querySelector(".task-wrapper").appendChild(taskElement);
+
+        // Update the task's list on the server
+        const taskId = taskElement.id.split("-")[1];
+        await fetch(`/api/tasks/${taskId}/move`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ listId: newListId }),
+        });
+      }
+    }
+   </script>
+    <script src="./js/createTask.js"></script>
+    {{!-- <script src="./js/newComment.js"></script>  --}}
