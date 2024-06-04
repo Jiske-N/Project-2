@@ -1,38 +1,18 @@
-{{! Basic page for task manager }}
+{{! Basic page for task search. mostly copied from board.handlebars. }}
 {{! APPLY STYLING VIA BOOTSTRAP + CSS }}
 
 <main class="container">
   <header class="header">
-    <h1 class="title">Task Board Test</h1>
-    <form id="filterTasks">
+    <h1 class="title">Task Search</h1>
+    {{!-- <form id="filterTasks">
       <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user.">
             <input type="text" class="form-control" id="taskByStatus" placeholder="Search tasks by status.">
                   <input type="text" class="form-control" id="taskByDate" placeholder="Search tasks by due date.">
       <button type="submit" class="btn btn-primary">Filter tasks by fields.</button>
-    </form>
+    </form> --}}
   </header>
   <div class="flex-row">
     <section class="boards">
-      {{!-- {{#each boards}}
-          <div class="board">
-            <header class="board-header">
-              <h3 class="board-title">{{this.name}}</h3>
-            </header>
-            <section class="tasks">
-              {{#each this.tasks}}
-                <div class="task">
-                  <header class="task-header">
-                    <h5 class="task-title">{{this.title}}</h5>
-                  </header>
-                  <p class="task-text">{{this.description}}</p>
-                  <footer class="task-footer">
-                    <small class="task-status">{{this.status}}</small>
-                  </footer>
-                </div>
-              {{/each}}
-            </section>
-          </div>
-        {{/each}} --}}
 
     </section>
     <section class="list-container flex-row">
@@ -118,5 +98,5 @@
 {{! Update name for list }}
 
 <script src="./js/createTask.js"></script>
-<script src="./js/searchTask.js"></script>
+{{!-- <script src="./js/searchTask.js"></script> --}}
 <script src="./js/addList.js"></script>
