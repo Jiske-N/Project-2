@@ -1,4 +1,4 @@
-# taskmaster
+# Task Master
 
 ## The Project
 
@@ -13,7 +13,7 @@ Other features include:
 
 ## Link & Contents
 
--   [The Deployed Page]()
+-   [The Deployed Page](https://task-manager-98n4.onrender.com)
 -   [Installation and Usage](#installation-and-usage)
 -   [Future Development](#future-development)
 -   [Credits](#credits)
@@ -23,17 +23,18 @@ Other features include:
 
 ## Image
 
-![Image of Welcome Page]()
-![Image of Login/Signup]()
-![Image of Account Management]()
-![Image of the Board]()
-![Image of Task Options]()
+![Image of Welcome Page](./public/assets/images/welcome-screen.png)
+![Image of Login/Signup](./public/assets/images/signup-screen.png)
+![Image of Account Management](./public/assets/images/account-screen.png)
+![Image of the Board](./public/assets/images/board-screen.png)
+![Image of Task Options](./public/assets/images/task-options-modal.png)
+![Image of Search Results](./public/assets/images/search-screen.png)
 
 ## Installation and Usage
 
 This site is live on the web so no installation is necessary.
 
-Just click the following [link](), login of signup and start planning!
+Just click the following [link](https://task-manager-98n4.onrender.com), login of signup and start planning!
 
 ## Future Development
 
@@ -57,14 +58,12 @@ The following authors for providing their codes for public use through npm:
 -   Connect-Session-Sequelize
 -   Dayjs
 -   Dotenv
-<!-- -   Eslint -->
 -   Express
 -   Express-Handlebars
 -   Express-Session
 -   Handlebars
 -   Nodemon
 -   Pg
-<!-- -   Prettier -->
 -   Sequelize
 
 ## Questions and Feedback
@@ -101,8 +100,6 @@ Process - Jiske
 Demo - All
 Future development - Brian
 Q&A - All
-
-
 
 ## Contributing
 
