@@ -14,6 +14,9 @@ router.get("/", async (req, res) => {
             where: {
                 board_id: boards[0].id,
             },
+            order: [
+                ["id"]
+            ],
             include: {
                 model: Task,
                 include: {
@@ -99,7 +102,11 @@ router.delete("/:id", async (req, res) => {
 // Get all lists
 router.get("/lists", async (req, res) => {
     try {
-        const lists = await List.findAll();
+        const lists = await List.findAll({
+            order: [
+                ["id"]
+            ]
+        });
         res.json(lists);
     } catch (error) {
         res.status(500).json({ error: error.message });

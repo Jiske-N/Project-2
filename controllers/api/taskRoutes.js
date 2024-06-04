@@ -8,11 +8,11 @@ router.post('/', async (req, res) => {
         const listData = await List.findByPk(req.body.listId);
         const list = listData.get({ plain: true });
 
-
+        console.log(req.session)
         await Task.create({
             title: req.body.title,
             description: req.body.description,
-            user_id: req.body.user,
+            user_id: req.session.user_id,
             due_date: req.body.dueDate,
             list_id: req.body.listId,
             status: list.name
