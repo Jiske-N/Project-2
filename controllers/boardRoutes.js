@@ -26,9 +26,24 @@ router.get("/", async (req, res) => {
         });
         const lists = listsData.map((list) => list.get({ plain: true }));
 
+        const userData = await User_s.findAll();
+        const allUsers = userData.map((board) => board.get({ plain: true }));
+
+        const statusData = await Task.findAll();
+        const allStatusesWithDuplicates = statusData.map(
+            (board) => board.get({ plain: true }).status
+        );
+
+        function removeDuplicates(arr) {
+            return arr.filter((item, index) => arr.indexOf(item) === index);
+        }
+
+        const allStatuses = removeDuplicates(allStatusesWithDuplicates);
         //Get all the tasks for the board
         res.render("board", {
             lists,
+            allUsers,
+            allStatuses,
             username: req.session.username,
             logged_in: req.session.logged_in,
         });
@@ -105,7 +120,5 @@ router.get("/lists", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-
 
 module.exports = router;
