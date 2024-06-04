@@ -9,10 +9,20 @@
       </div>
       <form class="row g-3 align-items-center" id="filterTasks">
         <div class="col-auto">
-          <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user.">
+          <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user." list="listUsers">
+          <datalist id="listUsers">
+            {{#each allUsers as |User|}} 
+                    <option>{{User.name}}</option>
+{{/each}}
+          </datalist>
         </div>
         <div class="col-auto">
-          <input type="text" class="form-control" id="taskByStatus" placeholder="Search tasks by status.">
+          <input type="text" class="form-control" id="taskByStatus" placeholder="Search tasks by status." list="listStatuses">
+                    <datalist id="listStatuses">
+            {{#each allStatuses as |Status|}} 
+                    <option>{{Status}}</option>
+{{/each}}
+          </datalist>
         </div>
         <div class="col-auto">
           {{!-- <label for="taskByDate">Search tasks by due date.</label> --}}
@@ -152,3 +162,6 @@
 
 </script>
 <script src="./js/addList.js"></script>
+<script src="./js/searchTask.js"></script>
+<script src="./js/createTask.js"></script>
+

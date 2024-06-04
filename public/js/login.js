@@ -22,6 +22,23 @@ const handleLoginForm = async (submission) => {
     }
 };
 
+// check password meets requirements
+function checkPassword(submission) {
+    submission.preventDefault();
+
+    const input = document.getElementById("password");
+    if (input.value.length < 8) {
+        input.setCustomValidity("Password Must be at Least 8 Characters.");
+    } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity("");
+    }
+}
+
+// add event listeners to password inputs to allow for checkNewPassword
+document.querySelector("#password").addEventListener("input", checkPassword);
+
+// add event listener to form
 document
     .querySelector("#login-form")
     .addEventListener("submit", handleLoginForm);

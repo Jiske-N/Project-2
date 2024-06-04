@@ -30,4 +30,14 @@ const searchByUser = async (submission) => {
     }
 };
 
+// user autocomplete
+document.addEventListener(
+    "DOMContentLoaded",
+    (error) => {
+        $("#taskByUser").autocomplete();
+    },
+    false
+);
+
+// search form
 document.querySelector("#filterTasks").addEventListener("submit", searchByUser);
