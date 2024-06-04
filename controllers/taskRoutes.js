@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Board, List, Task, User_s } = require("../models");
+const { Board, List, Task, Comment, User_s } = require("../models");
 const { where } = require("sequelize");
 
 //GET task by id
@@ -23,27 +23,38 @@ router.get("/:id", async (req, res) => {
 // filter tasks based on search
 router.get("/", async (req, res) => {
     try {
-        const { nameInput, statusInput, dateInput } = req.query;
+        console.log("taskRoutes.js", "starting");
+        const { name, status, date } = req.query;
 
-        const user = await User_s.findOne({
-            where: {
-                name: nameInput,
-            },
-        });
+        console.log("taskRoutes.js", "req.query", req.query);
+
+        // console.log("taskRoutes.js", "user", user);
 
         let filter = {};
 
-        if (statusInput) {
-            filter.status = statusInput;
+        if (status && status !== "") {
+            filter.status = status;
         }
 
-        if (user) {
-            filter.user_id = user.id;
+        if (name && name !== "") {
+            const user = await User_s.findOne({
+                where: {
+                    name,
+                },
+            });
+            if (user) {
+                filter.user_id = user.id;
+            }
         }
 
-        if (dateInput) {
-            filter.due_date = dateInput;
+        if (date && date !== "") {
+            filter.due_date = date;
         }
+
+        console.log("taskRoutes.js", "filter", filter);
+
+        const boardsData = await Board.findAll();
+        const boards = boardsData.map((board) => board.get({ plain: true }));
 
         const listsData = await List.findAll({
             where: {
@@ -62,6 +73,7 @@ router.get("/", async (req, res) => {
         });
 
         const lists = listsData.map((list) => list.get({ plain: true }));
+        console.log("taskRoutes.js", "lists", lists);
 
         res.render("board", {
             lists,
@@ -75,23 +87,23 @@ router.get("/", async (req, res) => {
 
 // router.get("/", async (req, res) => {
 //     try {
-//         const { nameInput, statusInput, dateInput } = req.query;
+//         const { name, status, date } = req.query;
 
 //         const getUser = await User_s.findOne({
 //             where: {
-//                 name: nameInput,
+//                 name: name,
 //             },
 //         });
 
 //         const status = await Task.findAll({
 //             where: {
-//                 status: statusInput,
+//                 status: status,
 //             },
 //         });
 
 //         const due_date = await Task.findAll({
 //             where: {
-//                 due_date: dateInput,
+//                 due_date: date,
 //             },
 //         });
 

@@ -2,18 +2,21 @@
 const searchByUser = async (submission) => {
     submission.preventDefault();
 
-    //   collect new username
+    //   collect search params
     const nameInput = document.querySelector("#taskByUser").value.trim();
-    // const statusInput = document.querySelector("#taskByStatus").value.trim();
-    // const dateInput = document.querySelector("#taskByDate").value.trim();
+    const statusInput = document.querySelector("#taskByStatus").value.trim();
+    const dateInput = document.querySelector("#taskByDate").value.trim();
 
-    // confirm newUsername exists
-    if (nameInput) {
-        const response = await fetch("/task", {
-            method: "POST",
-            body: JSON.stringify({ userInput: nameInput }),
+    const searchString = `/task/search?name=${nameInput}&status=${statusInput}&date=${dateInput}`;
+    // search exists
+    if (nameInput || statusInput || dateInput) {
+        const response = await fetch(searchString, {
+            method: "GET",
+            // body: JSON.stringify({ userInput: nameInput }),
             headers: { "Content-Type": "application/json" },
         });
+
+        console.log("searchTask.js", "fetch sent awaiting response");
 
         if (response.ok) {
             document.location.reload();

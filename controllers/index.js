@@ -25,5 +25,6 @@ router.use("/api", apiRoutes);
 router.use("/board", checkAuthorisation, boardRoutes);
 // router.use("/signup", userController);
 router.use("/account", checkAuthorisation, accountRoutes);
-router.use("/task", checkAuthorisation, taskRoutes);
+// router.use("/task", checkAuthorisation, taskRoutes);
+router.use("/task", taskRoutes);
 module.exports = router;
