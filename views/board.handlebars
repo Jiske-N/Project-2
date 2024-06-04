@@ -59,9 +59,9 @@
         {{/each}} --}}
 
     </section>
-    <section class="list-container flex-row" id="div-{{id}}" ondrop="drop(event)" ondragover="allowDrop(event)" >
+    <section class="list-container flex-row" id="list-container" ondrop="dropList(event)" ondragover="allowDrop(event)" >
       {{#each lists as |List|}}
-        <div class="list flex-col" draggable="true" ondragstart="drag(event)" id="drag-list-{{id}}">
+        <div class="list flex-col" draggable="true" ondragstart="dragList(event)" id="list-{{id}}">
           <div class="flex-row list-title">
             {{{list_title_input name id}}}
             <button class="update-list-title" id="update-list-{{id}}" style="display:none">Update</button>
@@ -144,22 +144,48 @@
 {{! Update name for list }}
 
 <script>
-  const drop = (event) => {
-      event.preventDefault();
-  const data = event.dataTransfer.getData("text");
-  event.target.appendChild(document.getElementById(data));
+  const dropList = (event) => {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const listElement = document.getElementById(data);
+    const listContainer = document.getElementById("list-container");
 
+    listContainer.insertBefore(listElement, event.target.closest(".list"));
   }
 
-  const drag = (event) => {
-    event.dataTransfer.setData("text", event.target.id)
-    console.log(event)
+  const dragList = (event) => {
+    event.dataTransfer.setData("text", event.target.id);
+  }
+
+  const dropTask = async (event) => {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const taskElement = document.getElementById(data);
+    const newListElement = event.target.closest(".list");
+    const newTaskWrapper = newListElement.querySelector(".task-wrapper");
+
+    // Ensure drop target is a list
+    if (newListElement && newListElement.classList.contains("list")) {
+      const newListId = newListElement.id.split("-")[1];
+      newTaskWrapper.appendChild(taskElement);
+
+      // Update the task's list on the server
+      const taskId = taskElement.id.split("-")[1];
+      await fetch(`/api/tasks/${taskId}/move`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ listId: newListId }),
+      });
+    }
+  }
+
+  const dragTask = (event) => {
+    event.dataTransfer.setData("text", event.target.id);
   }
 
   const allowDrop = (event) => {
     event.preventDefault();
   }
-
 </script>
 <script src="./js/addList.js"></script>
 <script src="./js/searchTask.js"></script>
