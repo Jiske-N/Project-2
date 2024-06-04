@@ -3,14 +3,27 @@
 
 <main class="container">
   <header class="header">
-    <h1 class="title">Task Board</h1>
-    <form id="filterTasks">
-      <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user.">
-            <input type="text" class="form-control" id="taskByStatus" placeholder="Search tasks by status.">
-                  <input type="text" class="form-control" id="taskByDate" placeholder="Search tasks by due date.">
-      <button type="submit" class="btn btn-primary">Filter tasks by fields.</button>
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <h1 class="title">Task Board</h1>
+      </div>
+      <form class="row g-3 align-items-center" id="filterTasks">
+        <div class="col-auto">
+          <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user.">
+        </div>
+        <div class="col-auto">
+          <input type="text" class="form-control" id="taskByStatus" placeholder="Search tasks by status.">
+        </div>
+        <div class="col-auto">
+          <input type="text" class="form-control" id="taskByDate" placeholder="Search tasks by due date.">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Filter tasks by fields.</button>
+        </div>
+    </div>
     </form>
   </header>
+  
   <div class="flex-row">
     <section class="boards">
       {{!-- {{#each boards}}
