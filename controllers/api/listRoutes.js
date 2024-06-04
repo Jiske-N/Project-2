@@ -2,9 +2,8 @@ const router = require('express').Router();
 const { List } = require('../../models');
 
 
-// Create a new list
+// Create a new list - GM
 router.post("/", async (req, res) => {
-    console.log(req)
     try {
         const newList = await List.create({ 
             name: req.body.listInput,
@@ -16,7 +15,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// Update a list by ID
+// Update a list by ID - GM
 router.put("/:id", async (req, res) => {
     try {
         await List.update({
@@ -33,9 +32,9 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// Delete a list by ID
+// Delete a list by ID - GM
 router.delete("/:id",  (req, res) => {
-    console.log(req)
+
     try {
         List.destroy({
            where: {

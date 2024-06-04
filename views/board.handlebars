@@ -49,9 +49,9 @@
         {{/each}} --}}
 
     </section>
-    <section class="list-container flex-row">
+    <section class="list-container flex-row" id="div-{{id}}" ondrop="drop(event)" ondragover="allowDrop(event)" >
       {{#each lists as |List|}}
-        <div class="list flex-col">
+        <div class="list flex-col" draggable="true" ondragstart="drag(event)" id="drag-list-{{id}}">
           <div class="flex-row list-title">
             {{{list_title_input name id}}}
             <button class="update-list-title" id="update-list-{{id}}" style="display:none">Update</button>
@@ -89,7 +89,6 @@
 
                     if (response.ok) {
                       // If successful, redirect the browser to the profile page
-                      console.log("title")
                       document.location.reload();
                     } else {
                       alert(`${response.statusText}: Invalid task`);
@@ -106,9 +105,12 @@
             {{> task-popup}}
           </div>
         </div>
+        {{!-- <div id="div-{{id}}" ondrop="drop(event)" ondragover="allowDrop(event)"></div> --}}
       {{/each}}
     </section>
 
+
+    {{!-- List section --}}
     <section class="list-button-container">
       <button class="list-button" id="open-list" style="display:flex">
         <i class="fa-solid fa-plus"></i>
@@ -131,6 +133,22 @@
 
 {{! Update name for list }}
 
-<script src="./js/createTask.js"></script>
-<script src="./js/searchTask.js"></script>
+<script>
+  const drop = (event) => {
+      event.preventDefault();
+  const data = event.dataTransfer.getData("text");
+  event.target.appendChild(document.getElementById(data));
+
+  }
+
+  const drag = (event) => {
+    event.dataTransfer.setData("text", event.target.id)
+    console.log(event)
+  }
+
+  const allowDrop = (event) => {
+    event.preventDefault();
+  }
+
+</script>
 <script src="./js/addList.js"></script>
