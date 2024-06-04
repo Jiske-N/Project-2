@@ -17,7 +17,7 @@ const handleSignupForm = async (submission) => {
         });
 
         if (response.ok) {
-            document.location.replace("/");
+            document.location.replace("/board");
         } else {
             alert("incorrect user name or email");
         }
