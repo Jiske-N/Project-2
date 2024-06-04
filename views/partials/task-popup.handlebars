@@ -25,20 +25,56 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="task-title">Task title</label>
-          <input class="form-input" type="text" id="task-title-new" />
+          <input class="form-input" type="text" id="task-title-new-{{id}}" />
         </div>
         <div class="form-group">
           <label for="task-description">Description</label>
-          <textarea class="form-input" id="task-description-new"></textarea>
+          <textarea class="form-input" id="task-description-new-{{id}}"></textarea>
         </div>
         <div class="form-group">
           <label for="task-duedate">Due date</label>
-          <input class="form-input" type="date" id="task-duedate-new" />
+          <input class="form-input" type="date" id="task-duedate-new-{{id}}" />
         </div>
 
-        <button id="task-save">Add Task</button>
+        <button id="task-save-{{id}}">Add Task</button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document
+    .querySelector('#task-save-{{id}}')
+    .addEventListener('click', async () => {
+
+
+const title = document.querySelector('#task-title-new-{{id}}').value.trim();
+  const description = document.querySelector('#task-description-new-{{id}}').value.trim();
+  const dueDate = document.querySelector('#task-duedate-new-{{id}}').value;
+  const listId = {{id}}
+  
+  console.log(listId)
+
+  if (title && description && dueDate, listId) {
+    // Send a POST request to the API endpoint
+    const response = await fetch('/api/tasks', {
+      method: 'POST',
+      body: JSON.stringify({ title, description, dueDate, listId }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+  
+
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace('/board');
+    } else {
+      alert(`${response.statusText}: Invalid task`);
+    }
+  }
+  document.getElementById('myModal').setAttribute('style', 'display:none'); 
+    });
+
+
+
+</script>
 
