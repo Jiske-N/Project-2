@@ -35,8 +35,15 @@ Demo Ends
 ## Login/Logout and Account Settings
 
 ## Board Page
+- Adding a new list
+- Editing a list name
+- Deleting a list
 
 ## Task Management
+ - Adding a new task
+ - Editing a task
+ - Deleting a task
+ - Writing a new comment
 
 ## Concept
 

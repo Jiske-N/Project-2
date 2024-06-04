@@ -155,7 +155,6 @@ p {
 }
 .modal-content {
   border-radius: 8px;
-  padding-bottom: 2rem;
 }
 
 .modal-body,
@@ -258,6 +257,53 @@ p {
   color: black;
 }
 
+.list-button-container {
+    margin: 2rem;
+    .fa-plus {
+        margin-right: 1rem;
+    }
+}
+
+.list-button {
+    width: 10rem;
+}
+
+.list-button-sml {
+    font-size: 14px;
+    width: 5rem;
+    padding: 5px;
+}
+
+.list-name-input {
+    height: 3rem;
+    border: none;
+    border-radius: 8px;
+}
+
+.list-title {
+    justify-content: center;
+    [id^="delete-list"] {
+        margin-left: auto;
+    }
+}
+
+.update-list-title {
+    margin-left: 1rem;
+    background-color: white;
+    color: var(--main-blue);
+}
+
+[id^="list-title"] {
+    background-color: transparent;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    border: none!important;
+}
+
+
+
+
 /*-------------COMMENTS-------------*/
 .comment-container {
   border-radius: 8px;
@@ -298,6 +344,7 @@ p {
   padding: 5px;
   margin-right: 0.5rem;
   margin-left: 0.2rem;
+  text-align: center;
 }
 
 /*-------------GENERAL-------------*/

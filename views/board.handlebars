@@ -1,16 +1,17 @@
 {{! Basic page for task manager }}
 {{! APPLY STYLING VIA BOOTSTRAP + CSS }}
 
-    <main class="container">
-      <header class="header">
-        <h1 class="title">Task Board</h1>
+<main class="container">
+  <header class="header">
+    <h1 class="title">Task Board</h1>
 <form id="filterTasks">
     <input type="text" class="form-control" id="taskByUser" placeholder="Search tasks by user.">
   <button type="submit" class="btn btn-primary">Filter tasks by fields.</button>
 </form>
-      </header>
-      <section class="boards">
-        {{!-- {{#each boards}}
+  </header>
+  <div class="flex-row">
+    <section class="boards">
+      {{!-- {{#each boards}}
           <div class="board">
             <header class="board-header">
               <h3 class="board-title">{{this.name}}</h3>
@@ -31,57 +32,89 @@
           </div>
         {{/each}} --}}
 
-
-      </section>
-      <section class="list-container flex-row">
-        {{#each lists as |List|}}
+    </section>
+    <section class="list-container flex-row">
+      {{#each lists as |List|}}
         <div class="list flex-col">
-          <h2>{{name}}</h2>
-            <div class="task-wrapper flex-col">
-              {{> task-details}}
-            </div>
-            <div class="new-task-container">
-            {{!-- Add task button at the bottom of each list --}}
+          <div class="flex-row list-title">
+            {{{list_title_input name id}}}
+            <button class="update-list-title" id="update-list-{{id}}" style="display:none">Update</button>
+            <button id="delete-list-{{id}}">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <script>
+            const deleteListButton{{id}} = document.getElementById("delete-list-{{id}}")
+            deleteListButton{{id}}.addEventListener("click", async () => {
+                  const response = await fetch('/api/list/{{id}}', {
+                    method: 'DELETE',
+                });
+
+              if (response.ok) {
+              // If successful, redirect the browser to the profile page
+              document.location.replace('/board');
+              } else {
+                alert(`${response.statusText}: Invalid List delete`);
+              }
+            })
+
+            const updateList{{id}} = document.getElementById("list-title-{{id}}").addEventListener("click", () => {
+              const updateButton = document.getElementById("update-list-{{id}}");
+              updateButton.style.display = "flex";
+              updateButton.addEventListener("click", async () => {
+                    const title = document.getElementById("list-title-{{id}}").value;
+                    const listId = {{id}}
+
+                    const response = await fetch("/api/list/{{id}}", {
+                      method: 'PUT',
+                      body: JSON.stringify({title, listId }),
+                      headers: { 'Content-Type': 'application/json' }
+                    })
+
+                    if (response.ok) {
+                      // If successful, redirect the browser to the profile page
+                      console.log("title")
+                      document.location.reload();
+                    } else {
+                      alert(`${response.statusText}: Invalid task`);
+                    }
+              })
+            })
+
+          </script>
+          <div class="task-wrapper flex-col">
+            {{> task-details}}
+          </div>
+          <div class="new-task-container">
+            {{! Add task button at the bottom of each list }}
             {{> task-popup}}
-            </div>
+          </div>
         </div>
-        {{/each}}
-      </section>
+      {{/each}}
+    </section>
 
+    <section class="list-button-container">
+      <button class="list-button" id="open-list" style="display:flex">
+        <i class="fa-solid fa-plus"></i>
+        Add List</button>
+      <div
+        id="open-list-container"
+        class="list-hidden flex-col"
+        style="display:none"
+      >
+        <input
+          class="list-name-input"
+          id="list-name-input"
+          placeholder="List Name"
+        />
+        <button class="list-button-sml" id="add-list">Add List</button>
+      </div>
+    </section>
+  </div>
+</main>
 
+{{! Update name for list }}
 
-    </main>
-
-   {{!-- Update name for list --}}
- <script>
-  document.querySelector('.add-list-form').addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const name = event.target.name.value;
-
-      await fetch('/api/lists', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
-      });
-
-      window.location.reload();
-    });
-//Move task to another list, add draggable functionality
-    document.querySelectorAll('.move-task-select').forEach(select => {
-      select.addEventListener('change', async (event) => {
-        const taskId = event.target.dataset.taskId;
-        const newListId = event.target.value;
-
-        await fetch(`/api/tasks/${taskId}/move`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ listId: newListId }),
-        });
-
-        window.location.reload();
-      });
-    });
-   </script>
-    <script src="./js/createTask.js"></script>
+<script src="./js/createTask.js"></script>
         <script src="./js/searchTask.js"></script>
-    {{!-- <script src="./js/newComment.js"></script>  --}}
+<script src="./js/addList.js"></script>
