@@ -8,7 +8,6 @@ router.post('/', async (req, res) => {
         const listData = await List.findByPk(req.body.listId);
         const list = listData.get({ plain: true });
 
-        console.log(req.session)
         await Task.create({
             title: req.body.title,
             description: req.body.description,

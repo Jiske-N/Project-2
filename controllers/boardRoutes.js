@@ -28,7 +28,6 @@ router.get("/", async (req, res) => {
             },
         });
         const lists = listsData.map((list) => list.get({ plain: true }));
-
         const userData = await User_s.findAll();
         const allUsers = userData.map((board) => board.get({ plain: true }));
 
